@@ -5,7 +5,7 @@ import LoginPage from './Login/LoginPage';
 
 const routes = (
   <Switch>
-    <Route exact path="/" component={LoginPage} />
+    <Route path="/" component={LoginPage} />
   </Switch>
 );
 
