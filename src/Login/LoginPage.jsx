@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import FacebookLogin from 'react-facebook-login';
 
 const LoginPage = () => {
@@ -7,10 +6,15 @@ const LoginPage = () => {
 
   const apiAuth = (fbResponse) => {
     console.log(fbResponse.accessToken);
-    axios.post(`${BASE_URL}${fbResponse.accessToken}`)
+    fetch(`${BASE_URL}${fbResponse.accessToken}`, {
+      method: 'POST',
+    })
       .then((apiResponse) => {
-        console.log(apiResponse.data);
-      });
+        return apiResponse.json();
+      })
+      .then((res) => {
+        console.log(res);
+      })
   };
 
   return (
