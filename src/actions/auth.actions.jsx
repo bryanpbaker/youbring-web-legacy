@@ -11,13 +11,10 @@ const BASE_URL = 'http://localhost:5000/auth/facebook?access_token=';
  */
 export function fetchUser() {
   return (dispatch) => {
-    // get user from localstorage
-    const user = JSON.parse(localStorage.getItem('user'));
-
-    // dispatch the user
+    // dispatch user from localStorage
     dispatch({
       type: FETCH_USER,
-      payload: user,
+      payload: JSON.parse(localStorage.getItem('user')),
     });
   };
 }
@@ -39,7 +36,7 @@ export function facebookAuth(accessToken) {
         // save user to localstorage
         localStorage.setItem('user', JSON.stringify(user));
 
-        // dispatch the user
+        // dispatch the user from localStorage
         dispatch({
           type: FETCH_USER,
           payload: JSON.parse(localStorage.getItem('user')),
