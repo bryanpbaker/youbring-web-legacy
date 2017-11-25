@@ -1,4 +1,4 @@
-import { FETCH_USER, FACEBOOK_AUTH } from '../actions/auth.actions';
+import { FETCH_USER } from '../actions/auth.actions';
 
 export default function (state = null, action) {
   switch (action.type) {
