@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { fetchUser, facebookAuth, emailAuth } from '../../actions/auth.actions';
 // import components
 import EmailLogin from './EmailLogin/EmailLogin';
+import CreateUser from '../CreateUser/CreateUser';
 
 class Login extends Component {
   constructor(props) {
@@ -49,6 +50,7 @@ class Login extends Component {
           callback={this.apiAuth}
         />
         <EmailLogin onSubmit={this.emailAuth} />
+        <CreateUser />
       </div>
     );
   }
