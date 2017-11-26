@@ -3,7 +3,7 @@ export const FETCH_USER = 'FETCH_USER';
 export const FACEBOOK_AUTH = 'FACEBOOK_AUTH';
 
 // TODO, use env variable for api url
-const BASE_URL = 'http://localhost:5000/auth/facebook?access_token=';
+const BASE_URL = 'http://localhost:5000/auth/';
 
 /**
  * check local storage to see if a user is currently logged in
@@ -28,7 +28,7 @@ export function fetchUser() {
 export function facebookAuth(accessToken) {
   return (dispatch) => {
     // post to API with accessToken
-    fetch(`${BASE_URL}${accessToken}`, {
+    fetch(`${BASE_URL}facebook?access_token=${accessToken}`, {
       method: 'POST',
     })
       .then(res => res.json())
@@ -41,6 +41,30 @@ export function facebookAuth(accessToken) {
           type: FETCH_USER,
           payload: JSON.parse(localStorage.getItem('user')),
         });
+      });
+  };
+}
+
+export function emailAuth(credentials) {
+  return (dispatch) => {
+    fetch(`${BASE_URL}login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password
+      }),
+    })
+      .then(res => res.json())
+      .then((user) => {
+        localStorage.setItem('user', JSON.stringify(user));
+
+        dispatch({
+          type: FETCH_USER,
+          payload: JSON.parse(localStorage.getItem('user')),
+        })
       });
   };
 }

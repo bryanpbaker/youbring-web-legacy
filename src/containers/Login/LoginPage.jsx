@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
 import { connect } from 'react-redux';
 // import action creators
-import { fetchUser, facebookAuth } from '../../actions/auth.actions';
+import { fetchUser, facebookAuth, emailAuth } from '../../actions/auth.actions';
 // import components
 import EmailLogin from '../EmailLogin/EmailLogin';
 
@@ -13,6 +13,7 @@ class LoginPage extends Component {
 
     // bind methods to this
     this.apiAuth = this.apiAuth.bind(this);
+    this.emailAuth = this.emailAuth.bind(this);
   }
 
   componentWillMount() {
@@ -20,8 +21,8 @@ class LoginPage extends Component {
     this.props.fetchUser();
   }
 
-  testSubmit(values) {
-    console.log('values', values);
+  emailAuth(values) {
+    this.props.emailAuth(values);
   }
 
   /**
@@ -47,7 +48,7 @@ class LoginPage extends Component {
           appId="1013591492112556"
           callback={this.apiAuth}
         />
-        <EmailLogin onSubmit={this.testSubmit} />
+        <EmailLogin onSubmit={this.emailAuth} />
       </div>
     );
   }
@@ -60,4 +61,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { facebookAuth, fetchUser })(LoginPage);
+export default connect(mapStateToProps, { facebookAuth, fetchUser, emailAuth })(LoginPage);
