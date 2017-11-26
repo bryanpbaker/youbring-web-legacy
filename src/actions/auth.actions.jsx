@@ -45,8 +45,15 @@ export function facebookAuth(accessToken) {
   };
 }
 
+/**
+ * posts to our API with an email and password
+ * get back a JWT and a user, save to localStorage
+ * dispatch the user
+ * @param {Object} credentials - user login credentials
+ */
 export function emailAuth(credentials) {
   return (dispatch) => {
+    // post to API with credentials
     fetch(`${BASE_URL}login`, {
       method: 'POST',
       headers: {
@@ -59,8 +66,10 @@ export function emailAuth(credentials) {
     })
       .then(res => res.json())
       .then((user) => {
+        // save user to localStorage
         localStorage.setItem('user', JSON.stringify(user));
 
+        // dispatch the user
         dispatch({
           type: FETCH_USER,
           payload: JSON.parse(localStorage.getItem('user')),

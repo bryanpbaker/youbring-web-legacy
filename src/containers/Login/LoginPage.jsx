@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // import action creators
 import { fetchUser, facebookAuth, emailAuth } from '../../actions/auth.actions';
 // import components
-import EmailLogin from '../EmailLogin/EmailLogin';
+import EmailLogin from '../../components/EmailLogin/EmailLogin';
 
 class LoginPage extends Component {
   constructor(props) {
