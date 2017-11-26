@@ -7,7 +7,7 @@ import { fetchUser, facebookAuth, emailAuth } from '../../actions/auth.actions';
 // import components
 import EmailLogin from './EmailLogin/EmailLogin';
 
-class LoginPage extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -61,4 +61,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { facebookAuth, fetchUser, emailAuth })(LoginPage);
+export default connect(mapStateToProps, { facebookAuth, fetchUser, emailAuth })(Login);

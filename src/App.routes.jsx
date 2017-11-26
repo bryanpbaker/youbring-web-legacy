@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import LoginPage from './containers/Login/LoginPage';
+import Login from './containers/Login/Login';
 import Dashboard from './containers/Dashboard/Dashboard';
 
 const routes = (
   <Switch>
-    <Route exact path="/" component={LoginPage} />
+    <Route exact path="/" component={Login} />
     <Route exact patch="/dashboard" component={Dashboard} />
   </Switch>
 );
