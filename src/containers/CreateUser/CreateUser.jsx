@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { createUser } from '../../actions/auth.actions';
 
 // form validation
 const validate = (values) => {
@@ -51,14 +52,10 @@ const renderField = ({
   </div>
 );
 
-const testSubmit = (values) => {
-  console.log(values);
-}
-
 const CreateUser = ({ handleSubmit }) => (
   <div className="email-login">
     <h3>Sign Up!</h3>
-    <form onSubmit={handleSubmit(testSubmit)}>
+    <form onSubmit={handleSubmit(createUser)}>
       <Field name="firstName" component={renderField} className="form-control" type="text" label="First Name" />
       <Field name="lastName" component={renderField} className="form-control" type="text" label="Last Name" />
       <Field name="email" component={renderField} className="form-control" type="email" label="Email" />
@@ -71,4 +68,4 @@ const CreateUser = ({ handleSubmit }) => (
 export default reduxForm({
   form: 'CreateUser',
   validate,
-})(CreateUser);
+}, null, { createUser })(CreateUser);

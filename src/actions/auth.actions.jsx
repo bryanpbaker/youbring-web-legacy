@@ -57,7 +57,7 @@ export function emailAuth(credentials) {
     fetch(`${BASE_URL}login`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: credentials.email,
@@ -76,4 +76,18 @@ export function emailAuth(credentials) {
         })
       });
   };
+}
+
+export function createUser(credentials) {
+  console.log(credentials);
+  // return (dispatch) => {
+  //   fetch(`${BASE_URL}new-user`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(credentials),
+  //   })
+  //     .then(res => console.log('res', res));
+  // };
 }
