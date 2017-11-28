@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { createUser } from '../../actions/auth.actions';
 
@@ -52,20 +53,30 @@ const renderField = ({
   </div>
 );
 
-const CreateUser = ({ handleSubmit }) => (
-  <div className="email-login">
-    <h3>Sign Up!</h3>
-    <form onSubmit={handleSubmit(createUser)}>
-      <Field name="firstName" component={renderField} className="form-control" type="text" label="First Name" />
-      <Field name="lastName" component={renderField} className="form-control" type="text" label="Last Name" />
-      <Field name="email" component={renderField} className="form-control" type="email" label="Email" />
-      <Field name="password" component={renderField} className="form-control" type="password" label="Password" />
-      <button type="submit" className="btn btn-primary">Submit</button>
-    </form>
-  </div>
-);
+const CreateUser = (props) => {
+  /**
+   * take user credentials and call createUser action creator
+   * @param {Object} user credentials
+   */
+  const createNewUser = (values) => {
+    props.createUser(values);
+  };
 
-export default reduxForm({
+  return (
+    <div className="email-login">
+      <h3>Sign Up!</h3>
+      <form onSubmit={props.handleSubmit(createNewUser)}>
+        <Field name="firstName" component={renderField} className="form-control" type="text" label="First Name" />
+        <Field name="lastName" component={renderField} className="form-control" type="text" label="Last Name" />
+        <Field name="email" component={renderField} className="form-control" type="email" label="Email" />
+        <Field name="password" component={renderField} className="form-control" type="password" label="Password" />
+        <button type="submit" className="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  );
+};
+
+export default connect(null, { createUser })(reduxForm({
   form: 'CreateUser',
   validate,
-}, null, { createUser })(CreateUser);
+})(CreateUser));

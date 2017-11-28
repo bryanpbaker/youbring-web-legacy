@@ -37,13 +37,12 @@ class Login extends Component {
   render() {
     // if there is a user, redirect to the dashboard
     if (this.props.user) {
-      return <Redirect to="/dashboard" />
+      return <Redirect to="/dashboard" />;
     }
 
     // if there is no user, show the login UI
     return (
       <div className="login-page">
-        Login Page
         <FacebookLogin
           appId="1013591492112556"
           callback={this.apiAuth}
