@@ -3,10 +3,10 @@ Color Variables
 **************************************/
 :root {
   /* colors */
-  --white: #FFFFFF;
-  --orange: #F2784B;
-  --light-blue: #4D9DE0;
-  --navy-blue: #344055;
+  --primary: #F2784B;
+  --secondary: #4D9DE0;
+  --accent: #344055;
+  --white: white;
   --light-gray: #BDC3C7;
   --black: #001021;
   --red: #D91E18;
@@ -41,7 +41,7 @@ Helpers
 }
 
 .btn-secondary {
-  background: var(--orange);
+  background: var(--primary);
   color: white;
 }
 
