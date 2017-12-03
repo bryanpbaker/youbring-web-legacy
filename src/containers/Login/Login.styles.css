@@ -19,3 +19,10 @@
   height: 60px;
   width: 60%;
 }
+
+.login .close-button {
+  font-size: 24px;
+  line-height: 24px;
+  position: absolute;
+  right: 30px;
+}

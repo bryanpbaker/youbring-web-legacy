@@ -56,6 +56,7 @@ class LandingPage extends Component {
         </Grid>
         <Login
           show={this.state.loginIsShowing}
+          toggleLogin={this.toggleLogin}
         />
       </div>
     );

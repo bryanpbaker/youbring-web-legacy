@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
 import { connect } from 'react-redux';
+import { Button, Glyphicon } from 'react-bootstrap';
 // import action creators
 import { fetchUser, facebookAuth, emailAuth } from '../../actions/auth.actions';
 // import components
@@ -45,6 +46,9 @@ class Login extends Component {
     // if there is no user, show the login UI
     return (
       <div className={`login ${this.props.show ? 'show' : ''}`}>
+        <Button className="close-button" onClick={this.props.toggleLogin}>
+          <Glyphicon glyph="remove" />
+        </Button>
         <FacebookLogin
           appId="1013591492112556"
           callback={this.apiAuth}
