@@ -1,6 +1,53 @@
 /**************************************
+Color Variables
+**************************************/
+:root {
+  /* colors */
+  --white: #FFFFFF;
+  --orange: #F2784B;
+  --light-blue: #4D9DE0;
+  --navy-blue: #344055;
+  --light-gray: #BDC3C7;
+  --black: #001021;
+  --red: #D91E18;
+
+  /* fonts */
+  --font: 'Poppins', sans-serif;
+}
+
+/**************************************
+Base
+**************************************/
+html, body {
+  height: 100%;
+  font-family: var(--font);
+}
+
+/**************************************
+Helpers
+**************************************/
+.text-danger, .danger {
+  color: var(--red);
+}
+
+.bg-danger, .btn-danger {
+  background-color: var(--red);
+}
+
+.btn {
+  border-radius: 0;
+  border: none;
+  padding: 9px 12px;
+}
+
+.btn-secondary {
+  background: var(--orange);
+  color: white;
+}
+
+/**************************************
 Input Styles
 **************************************/
 input.input-invalid {
-  border-color: #A94442;
+  border-color: var(--red);
 }

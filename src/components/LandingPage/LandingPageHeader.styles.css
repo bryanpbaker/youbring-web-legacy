@@ -1,0 +1,33 @@
+.landing-page-header {
+  background: var(--light-blue);
+  border: none;
+  margin-bottom: 0;
+}
+
+.landing-page-header a {
+  color: var(--white) !important;
+}
+
+.navbar-brand {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1.2px;
+}
+
+.navbar-toggle {
+  border: none;
+}
+
+.navbar-toggle .icon-bar {
+  background-color: white !important;
+  border-radius: 0px;
+  height: 3px;
+  margin-bottom: 2px;
+  width: 24px;
+}
+
+@media(min-width: 992px) {
+  .navbar-brand {
+    font-size: 28px;
+  }
+}
