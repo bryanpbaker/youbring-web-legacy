@@ -7,6 +7,8 @@ import { fetchUser, facebookAuth, emailAuth } from '../../actions/auth.actions';
 // import components
 import EmailLogin from './EmailLogin/EmailLogin';
 
+import './Login.styles.css';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -42,11 +44,16 @@ class Login extends Component {
 
     // if there is no user, show the login UI
     return (
-      <div className="login-page">
+      <div className={`login ${this.props.show ? 'show' : ''}`}>
         <FacebookLogin
           appId="1013591492112556"
           callback={this.apiAuth}
         />
+        <div>
+          <b style={{ display: 'block', marginTop: '20px', fontSize: '18px' }}>
+            -OR -
+          </b>
+        </div>
         <EmailLogin onSubmit={this.emailAuth} />
       </div>
     );

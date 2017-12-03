@@ -3,9 +3,9 @@ Color Variables
 **************************************/
 :root {
   /* colors */
-  --primary: #F2784B;
-  --secondary: #4D9DE0;
-  --accent: #344055;
+  --primary: #999;
+  --secondary: #666;
+  --accent: #aaa;
   --white: white;
   --light-gray: #BDC3C7;
   --black: #001021;

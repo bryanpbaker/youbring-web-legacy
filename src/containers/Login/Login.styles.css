@@ -1,0 +1,21 @@
+.login {
+  background: var(--primary);
+  bottom: 0;
+  padding: 50px;
+  position: fixed;
+  right: -100vw;
+  top: 67px;
+  transition: .3s all ease;
+  width: 100vw;
+}
+
+.login.show {
+  right: 0;
+  transition: .3s all ease;
+}
+
+.login input {
+  font-size: 32px;
+  height: 60px;
+  width: 60%;
+}
