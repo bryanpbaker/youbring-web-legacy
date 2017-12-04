@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
 import { connect } from 'react-redux';
 import { Button, Glyphicon } from 'react-bootstrap';
+import Loader from '../../components/Loader/Loader';
 // import action creators
 import { fetchUser, facebookAuth, emailAuth } from '../../actions/auth.actions';
 // import components
@@ -14,9 +15,14 @@ class Login extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      loading: false,
+    };
+
     // bind methods to this
     this.apiAuth = this.apiAuth.bind(this);
     this.emailAuth = this.emailAuth.bind(this);
+    this.showLoader = this.showLoader.bind(this);
   }
 
   componentWillMount() {
@@ -24,7 +30,25 @@ class Login extends Component {
     this.props.fetchUser();
   }
 
+  componentWillReceiveProps(nextProps) {
+    // if there are auth errors, hide the loader
+    if (nextProps.errors.authErrors) {
+      this.setState({
+        loading: false,
+      });
+    }
+  }
+
+  // show a loader when a process is loading
+  showLoader() {
+    this.setState({
+      loading: true,
+    });
+  }
+
+  // try to authenticate the user with their credentials
   emailAuth(values) {
+    this.showLoader();
     this.props.emailAuth(values);
   }
 
@@ -46,10 +70,12 @@ class Login extends Component {
     // if there is no user, show the login UI
     return (
       <div className={`login ${this.props.show ? 'show' : ''}`}>
+        <Loader loading={this.state.loading} />
         <Button className="close-button" onClick={this.props.toggleLogin}>
           <Glyphicon glyph="remove" />
         </Button>
         <FacebookLogin
+          onClick={this.showLoader}
           appId="1013591492112556"
           callback={this.apiAuth}
         />
@@ -58,7 +84,7 @@ class Login extends Component {
             -OR -
           </b>
         </div>
-        <EmailLogin onSubmit={this.emailAuth} />
+        <EmailLogin authErrors={this.props.errors.authErrors} onSubmit={this.emailAuth} />
       </div>
     );
   }
@@ -68,6 +94,7 @@ class Login extends Component {
 function mapStateToProps(state) {
   return {
     user: state.user,
+    errors: state.errors,
   };
 }
 

@@ -43,16 +43,42 @@ const renderField = ({
   </div>
 );
 
-const EmailLogin = ({ handleSubmit }) => (
-  <div className="email-login">
-    <h3>Login with your email address</h3>
-    <form onSubmit={handleSubmit}>
-      <Field name="email" component={renderField} className="form-control" type="email" label="Email" />
-      <Field name="password" component={renderField} className="form-control" type="password" label="Password" />
-      <button type="submit" className="btn btn-primary">Submit</button>
-    </form>
-  </div>
-);
+const EmailLogin = ({ authErrors, handleSubmit }) => {
+  // auth error cases and messages
+  if (authErrors && authErrors.status === 404) {
+    authErrors.user = 'User does not exist!';
+  }
+
+  if (authErrors && authErrors.status === 401) {
+    authErrors.password = 'Incorrect Password';
+  }
+
+  return (
+    <div className="email-login">
+      <h3>Login with your email address</h3>
+      <form onSubmit={handleSubmit}>
+        <Field name="email" component={renderField} className="form-control" type="email" label="Email" />
+        {authErrors && authErrors.user &&
+          <div className="text-danger">
+            {authErrors.user}
+          </div>
+        }
+        <Field name="password" component={renderField} className="form-control" type="password" label="Password" />
+        {authErrors && authErrors.password &&
+          <div className="text-danger">
+            {authErrors.password}
+          </div>
+        }
+        <button type="submit" className="btn btn-primary">Submit</button>
+      </form>
+      {authErrors &&
+        <h4 className="text-danger">
+          Login Failed
+        </h4>
+      }
+    </div>
+  );
+};
 
 export default reduxForm({
   form: 'EmailLogin',

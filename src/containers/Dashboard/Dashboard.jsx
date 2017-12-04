@@ -13,7 +13,7 @@ class Dashboard extends Component {
     if (this.props.user) {
       return (
         <div className="dashboard">
-          <h1>Hello { this.props.user.user.first_name}!</h1>
+          <h1>Hello { this.props.user.profile.first_name}!</h1>
         </div>
       );
     }

@@ -1,6 +1,7 @@
 // action types
 export const FETCH_USER = 'FETCH_USER';
 export const FACEBOOK_AUTH = 'FACEBOOK_AUTH';
+export const AUTH_ERROR = 'AUTH_ERROR';
 
 // TODO, use env variable for api url
 const BASE_URL = 'http://localhost:5000/auth/';
@@ -65,15 +66,25 @@ export function emailAuth(credentials) {
       }),
     })
       .then(res => res.json())
-      .then((user) => {
-        // save user to localStorage
-        localStorage.setItem('user', JSON.stringify(user));
+      .then((response) => {
+        if (response.success) {
+          // save user to localStorage
+          localStorage.setItem('user', JSON.stringify({ profile: response.user, token: response.token }));
 
-        // dispatch the user
-        dispatch({
-          type: FETCH_USER,
-          payload: JSON.parse(localStorage.getItem('user')),
-        })
+          // dispatch the user
+          dispatch({
+            type: FETCH_USER,
+            payload: JSON.parse(localStorage.getItem('user')),
+          });
+        } else {
+          dispatch({
+            type: AUTH_ERROR,
+            payload: { status: response.status, message: response.message },
+          });
+        }
+      })
+      .catch((err) => {
+        console.error('There was a problem...', err);
       });
   };
 }
