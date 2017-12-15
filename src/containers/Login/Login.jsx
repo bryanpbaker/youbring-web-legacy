@@ -71,7 +71,7 @@ class Login extends Component {
     return (
       <div className={`login ${this.props.show ? 'show' : ''}`}>
         <Loader loading={this.state.loading} />
-        <Button className="close-button" onClick={this.props.toggleLogin}>
+        <Button className="close-button" onClick={this.props.toggle}>
           <Glyphicon glyph="remove" />
         </Button>
         <FacebookLogin

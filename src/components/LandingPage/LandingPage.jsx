@@ -4,7 +4,8 @@ import './LandingPage.styles.css';
 
 import LandingPageHeader from './LandingPageHeader';
 import Login from '../../containers/Login/Login';
-import CreateUser from '../../containers/CreateUser/CreateUser';
+import Signup from '../Signup/Signup';
+
 
 class LandingPage extends Component {
   constructor() {
@@ -12,14 +13,24 @@ class LandingPage extends Component {
 
     this.state = {
       loginIsShowing: false,
+      signupIsShowing: false,
     };
 
     this.toggleLogin = this.toggleLogin.bind(this);
+    this.toggleSignup = this.toggleSignup.bind(this);
   }
 
   toggleLogin() {
     this.setState({
       loginIsShowing: !this.state.loginIsShowing,
+      signupIsShowing: false,
+    });
+  }
+
+  toggleSignup() {
+    this.setState({
+      signupIsShowing: !this.state.signupIsShowing,
+      loginIsShowing: false,
     });
   }
 
@@ -28,6 +39,7 @@ class LandingPage extends Component {
       <div className="landing-page">
         <LandingPageHeader
           toggleLogin={this.toggleLogin}
+          toggleSignup={this.toggleSignup}
         />
         <Jumbotron>
           <Grid fluid>
@@ -56,7 +68,11 @@ class LandingPage extends Component {
         </Grid>
         <Login
           show={this.state.loginIsShowing}
-          toggleLogin={this.toggleLogin}
+          toggle={this.toggleLogin}
+        />
+        <Signup
+          show={this.state.signupIsShowing}
+          toggle={this.toggleSignup}
         />
       </div>
     );

@@ -13,7 +13,7 @@ const LandingPageHeader = props => (
     <Navbar.Collapse>
       <Nav pullRight>
         <NavItem className="btn btn-primary" onClick={props.toggleLogin}>Log In</NavItem>
-        <NavItem className="btn btn-success">Sign Up</NavItem>
+        <NavItem className="btn btn-success" onClick={props.toggleSignup}>Sign Up</NavItem>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
