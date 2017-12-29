@@ -1,4 +1,4 @@
-import { FETCH_USER, AUTH_ERROR } from '../actions/auth.actions';
+import { FETCH_USER, AUTH_ERROR, CREATE_USER_ERROR } from '../actions/auth.actions';
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -7,6 +7,11 @@ export default function (state = {}, action) {
       return {
         ...state,
         authErrors: action.payload,
+      };
+    case CREATE_USER_ERROR:
+      return {
+        ...state,
+        createUserErrors: action.payload,
       };
     case FETCH_USER:
       return Object.keys(state)

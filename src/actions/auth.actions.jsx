@@ -2,6 +2,7 @@
 export const FETCH_USER = 'FETCH_USER';
 export const FACEBOOK_AUTH = 'FACEBOOK_AUTH';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const CREATE_USER_ERROR = 'CREATE_USER_ERROR';
 
 // TODO, use env variable for api url
 const BASE_URL = 'http://localhost:5000/auth/';
@@ -34,7 +35,6 @@ export function facebookAuth(accessToken) {
     })
       .then(res => res.json())
       .then((response) => {
-        console.log('fb response', response);
         // save user to localstorage
         localStorage.setItem('user', JSON.stringify({ profile: response.user, token: response.token }));
 
@@ -118,7 +118,7 @@ export function createUser(credentials) {
           });
         } else {
           dispatch({
-            type: AUTH_ERROR,
+            type: CREATE_USER_ERROR,
             payload: { status: response.status, message: response.message },
           });
         }

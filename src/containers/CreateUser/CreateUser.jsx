@@ -71,12 +71,23 @@ const CreateUser = (props) => {
         <Field name="email" component={renderField} className="form-control" type="email" label="Email" />
         <Field name="password" component={renderField} className="form-control" type="password" label="Password" />
         <button type="submit" className="btn btn-primary">Submit</button>
+        {props.createUserError &&
+          <div className="text-danger">
+            {props.createUserError.message}
+          </div>
+        }
       </form>
     </div>
   );
 };
 
-export default connect(null, { createUser })(reduxForm({
+function mapStateToProps(state) {
+  return {
+    createUserError: state.errors.createUserErrors || {},
+  };
+}
+
+export default connect(mapStateToProps, { createUser })(reduxForm({
   form: 'CreateUser',
   validate,
 })(CreateUser));
