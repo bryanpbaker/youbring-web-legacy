@@ -33,9 +33,10 @@ export function facebookAuth(accessToken) {
       method: 'POST',
     })
       .then(res => res.json())
-      .then((user) => {
+      .then((response) => {
+        console.log('fb response', response);
         // save user to localstorage
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify({ profile: response.user, token: response.token }));
 
         // dispatch the user from localStorage
         dispatch({
@@ -105,15 +106,25 @@ export function createUser(credentials) {
       body: JSON.stringify(credentials),
     })
       .then(res => res.json())
-      .then((user) => {
-        localStorage.setItem('user', JSON.stringify(user))
+      .then((response) => {
+        if (response.success) {
+          // save user to localStorage
+          localStorage.setItem('user', JSON.stringify({ profile: response.user, token: response.token }));
 
-        // dispatch the user
-        dispatch({
-          type: FETCH_USER,
-          payload: JSON.parse(localStorage.getItem('user')),
-        })
+          // dispatch the user
+          dispatch({
+            type: FETCH_USER,
+            payload: JSON.parse(localStorage.getItem('user')),
+          });
+        } else {
+          dispatch({
+            type: AUTH_ERROR,
+            payload: { status: response.status, message: response.message },
+          });
+        }
       })
-      .catch(error => console.log(error));
+      .catch((err) => {
+        console.error('There was a problem...', err);
+      });
   };
 }

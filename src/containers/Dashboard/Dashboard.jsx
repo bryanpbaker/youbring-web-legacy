@@ -11,6 +11,7 @@ class Dashboard extends Component {
 
   render() {
     if (this.props.user) {
+      console.log(this.props.user);
       return (
         <div className="dashboard">
           <h1>Hello { this.props.user.profile.first_name}!</h1>
