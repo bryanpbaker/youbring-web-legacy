@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { createUser } from '../../actions/auth.actions';
+import Loader from '../../components/Loader/Loader';
 
 // form validation
 const validate = (values) => {
