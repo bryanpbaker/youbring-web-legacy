@@ -4,27 +4,39 @@ import { Redirect } from 'react-router-dom';
 
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
 
-import { fetchUser, authorizeUser } from '../../actions/auth.actions';
+import { fetchUser, authorizeUser, logout } from '../../actions/auth.actions';
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+
+    this.logout = this.logout.bind(this);
+  }
+
   componentWillMount() {
     setTimeout(() => {
       this.props.authorizeUser();
       this.props.fetchUser();
-    }, 2000);
+    }, 1500);
+  }
+
+  logout() {
+    this.props.logout();
   }
 
   render() {
-    if (this.props.isAuthorized && this.props.user) {
+    if (this.props.isAuthenticated && this.props.user) {
       return (
         <div className="dashboard">
-          <DashboardHeader />
+          <DashboardHeader
+            logout={this.logout}
+          />
           <h1>Hello { this.props.user.profile.first_name}!</h1>
         </div>
       );
     }
 
-    if (this.props.isAuthorized === false) {
+    if (this.props.isAuthenticated === false) {
       return <Redirect to="/" />;
     }
 
@@ -39,8 +51,8 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
   return {
     user: state.user,
-    isAuthorized: state.isAuthorized,
+    isAuthenticated: state.isAuthenticated,
   };
 }
 
-export default connect(mapStateToProps, { fetchUser, authorizeUser })(Dashboard);
+export default connect(mapStateToProps, { fetchUser, authorizeUser, logout })(Dashboard);

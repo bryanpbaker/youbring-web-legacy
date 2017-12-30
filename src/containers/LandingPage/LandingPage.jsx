@@ -4,8 +4,8 @@ import { Jumbotron, Grid, Row, Col, Button } from 'react-bootstrap';
 import './LandingPage.styles.css';
 
 import LandingPageHeader from './LandingPageHeader';
-import Login from '../../containers/Login/Login';
-import Signup from '../Signup/Signup';
+import Login from '../Login/Login';
+import Signup from '../../components/Signup/Signup';
 
 
 class LandingPage extends Component {
@@ -41,7 +41,7 @@ class LandingPage extends Component {
         <LandingPageHeader
           toggleLogin={this.toggleLogin}
           toggleSignup={this.toggleSignup}
-          isAuthorized={this.props.isAuthorized}
+          isAuthenticated={this.props.isAuthenticated}
         />
         <Jumbotron>
           <Grid fluid>
@@ -83,7 +83,7 @@ class LandingPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    isAuthorized: state.isAuthorized,
+    isAuthenticated: state.isAuthenticated,
   }
 }
 

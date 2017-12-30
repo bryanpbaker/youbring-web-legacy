@@ -5,7 +5,7 @@ import './App.css';
 
 import { authorizeUser } from './actions/auth.actions';
 
-import LandingPage from './components/LandingPage/LandingPage';
+import LandingPage from './containers/LandingPage/LandingPage';
 import Dashboard from './containers/Dashboard/Dashboard';
 
 class App extends Component {
@@ -31,7 +31,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    isAuthorized: state.isAuthorized,
+    isAuthenticated: state.isAuthenticated,
   };
 }
 

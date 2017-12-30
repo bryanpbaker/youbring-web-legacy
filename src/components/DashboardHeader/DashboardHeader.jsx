@@ -26,7 +26,7 @@ const DashboardHeader = (props) => {
           </Nav>
           <Nav pullRight>
             <NavItem eventKey={1} href="#">Link Right</NavItem>
-            <NavItem eventKey={2} href="#">Link Right</NavItem>
+            <NavItem eventKey={2} onClick={props.logout}>Log Out</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

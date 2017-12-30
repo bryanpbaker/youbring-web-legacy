@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
 import { connect } from 'react-redux';
 import { Button, Glyphicon } from 'react-bootstrap';
@@ -16,17 +17,13 @@ class Login extends Component {
 
     this.state = {
       loading: false,
+      redirectToDashboard: false,
     };
 
     // bind methods to this
     this.apiAuth = this.apiAuth.bind(this);
     this.emailAuth = this.emailAuth.bind(this);
     this.showLoader = this.showLoader.bind(this);
-  }
-
-  componentWillMount() {
-    // check if there is already a user logged in
-    this.props.fetchUser();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -61,7 +58,12 @@ class Login extends Component {
   }
 
   render() {
-    // if there is no user, show the login UI
+    // redirect after successful login
+    if (this.props.isAuthenticated && this.props.show) {
+      return <Redirect to="/dashboard" />;
+    }
+
+    // if not authenticated, show the login UI
     return (
       <div className={`login ${this.props.show ? 'show' : ''}`}>
         <Loader loading={this.state.loading} />
@@ -87,7 +89,7 @@ class Login extends Component {
 // map user from store to props
 function mapStateToProps(state) {
   return {
-    user: state.user,
+    isAuthenticated: state.isAuthenticated,
     errors: state.errors,
   };
 }

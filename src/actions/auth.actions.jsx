@@ -22,6 +22,11 @@ export function fetchUser() {
   };
 }
 
+/**
+ * check local storage for a user
+ * if there is a user, authenticate with the token
+ * if not, redirect to the login page
+ */
 export function authorizeUser() {
   return (dispatch) => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -73,8 +78,8 @@ export function facebookAuth(accessToken) {
 
         // dispatch the user from localStorage
         dispatch({
-          type: FETCH_USER,
-          payload: JSON.parse(localStorage.getItem('user')),
+          type: USER_AUTH,
+          payload: true,
         });
       });
   };
@@ -107,8 +112,8 @@ export function emailAuth(credentials) {
 
           // dispatch the user
           dispatch({
-            type: FETCH_USER,
-            payload: JSON.parse(localStorage.getItem('user')),
+            type: USER_AUTH,
+            payload: true,
           });
         } else {
           dispatch({
@@ -146,8 +151,8 @@ export function createUser(credentials) {
 
           // dispatch the user
           dispatch({
-            type: FETCH_USER,
-            payload: JSON.parse(localStorage.getItem('user')),
+            type: USER_AUTH,
+            payload: true,
           });
         } else {
           dispatch({
@@ -159,5 +164,21 @@ export function createUser(credentials) {
       .catch((err) => {
         console.error('There was a problem...', err);
       });
+  };
+}
+
+/**
+ * remove the user from local storage, logging the user out
+ */
+export function logout() {
+  return (dispatch) => {
+    localStorage.removeItem('user');
+
+    dispatch({
+      type: USER_AUTH,
+      payload: false,
+    });
+
+    console.log('User has been logged out!');
   };
 }

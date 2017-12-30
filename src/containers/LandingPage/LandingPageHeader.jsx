@@ -13,14 +13,14 @@ const LandingPageHeader = props => (
       <Navbar.Toggle />
     </Navbar.Header>
     <Navbar.Collapse>
-      {props.isAuthorized &&
+      {props.isAuthenticated &&
         <Nav pullRight>
           <LinkContainer to="/dashboard">
             <NavItem className="btn btn-primary">Log In</NavItem>
           </LinkContainer>
         </Nav>
       }
-      {!props.isAuthorized &&
+      {!props.isAuthenticated &&
         <Nav pullRight>
           <NavItem className="btn btn-primary" onClick={props.toggleLogin}>Log In</NavItem>
           <NavItem className="btn btn-success" onClick={props.toggleSignup}>Sign Up</NavItem>
