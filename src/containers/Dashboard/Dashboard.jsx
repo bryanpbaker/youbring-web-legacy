@@ -24,6 +24,10 @@ class Dashboard extends Component {
       );
     }
 
+    if (this.props.isAuthorized === false) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className="dashboard-loading">
         loading...

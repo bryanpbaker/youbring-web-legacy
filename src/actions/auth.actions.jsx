@@ -45,8 +45,13 @@ export function authorizeUser() {
             });
           }
         });
-    };
+    } else {
+      dispatch({
+        type: USER_AUTH,
+        payload: false,
+      });
     }
+  };
 }
 
 /**
