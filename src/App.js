@@ -1,23 +1,38 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './App.css';
 
-import routes from './App.routes';
-import reducers from './reducers';
+import { authorizeUser } from './actions/auth.actions';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+import LandingPage from './components/LandingPage/LandingPage';
+import Dashboard from './containers/Dashboard/Dashboard';
 
-const App = () => {
-  return (
-    <Provider store={createStoreWithMiddleware(reducers)}>
+class App extends Component {
+  componentWillMount() {
+    this.authorizeUser();
+  }
+
+  authorizeUser() {
+    this.props.authorizeUser();
+  }
+
+  render() {
+    return (
       <BrowserRouter>
-        {routes}
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/dashboard" component={Dashboard} />
+        </Switch>
       </BrowserRouter>
-    </Provider>
-  );
+    );
+  }
 };
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    isAuthorized: state.isAuthorized,
+  };
+}
+
+export default connect(mapStateToProps, { authorizeUser })(App);

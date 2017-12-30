@@ -3,9 +3,10 @@ export const FETCH_USER = 'FETCH_USER';
 export const FACEBOOK_AUTH = 'FACEBOOK_AUTH';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const CREATE_USER_ERROR = 'CREATE_USER_ERROR';
+export const USER_AUTH = 'USER_AUTH';
 
 // TODO, use env variable for api url
-const BASE_URL = 'http://localhost:5000/auth/';
+const BASE_URL = 'http://localhost:5000/';
 
 /**
  * check local storage to see if a user is currently logged in
@@ -21,6 +22,33 @@ export function fetchUser() {
   };
 }
 
+export function authorizeUser() {
+  return (dispatch) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user) {
+      const { profile, token } = user;
+    
+      fetch(`${BASE_URL}user/${profile.userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        },
+      })
+        .then(res => res.json())
+        .then((response) => {
+          if (response.success) {
+            dispatch({
+              type: USER_AUTH,
+              payload: true,
+            });
+          }
+        });
+    };
+    }
+}
+
 /**
  * post to our API with a facebook access code
  * get back a JWT and a user, save to local storage
@@ -30,7 +58,7 @@ export function fetchUser() {
 export function facebookAuth(accessToken) {
   return (dispatch) => {
     // post to API with accessToken
-    fetch(`${BASE_URL}facebook?access_token=${accessToken}`, {
+    fetch(`${BASE_URL}auth/facebook?access_token=${accessToken}`, {
       method: 'POST',
     })
       .then(res => res.json())
@@ -56,7 +84,7 @@ export function facebookAuth(accessToken) {
 export function emailAuth(credentials) {
   return (dispatch) => {
     // post to API with credentials
-    fetch(`${BASE_URL}login`, {
+    fetch(`${BASE_URL}auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -98,7 +126,7 @@ export function emailAuth(credentials) {
  */
 export function createUser(credentials) {
   return (dispatch) => {
-    fetch(`${BASE_URL}new-user`, {
+    fetch(`${BASE_URL}auth/new-user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

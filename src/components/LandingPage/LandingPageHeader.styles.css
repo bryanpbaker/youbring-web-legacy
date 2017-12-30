@@ -9,7 +9,7 @@
   color: var(--white) !important;
 }
 
-.navbar-brand {
+.landing-page-header .navbar-brand {
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 1.2px;
@@ -18,11 +18,11 @@
   padding-top: 0;
 }
 
-.navbar-toggle {
+.landing-page-header .navbar-toggle {
   border: none;
 }
 
-.navbar-toggle .icon-bar {
+.landing-page-header .navbar-toggle .icon-bar {
   background-color: white !important;
   border-radius: 0px;
   height: 3px;
@@ -31,7 +31,7 @@
 }
 
 @media(min-width: 992px) {
-  .navbar-brand {
+  .landing-page-header .navbar-brand {
     font-size: 28px;
   }
 }

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import './LandingPageHeader.styles.css';
 
@@ -11,10 +13,19 @@ const LandingPageHeader = props => (
       <Navbar.Toggle />
     </Navbar.Header>
     <Navbar.Collapse>
-      <Nav pullRight>
-        <NavItem className="btn btn-primary" onClick={props.toggleLogin}>Log In</NavItem>
-        <NavItem className="btn btn-success" onClick={props.toggleSignup}>Sign Up</NavItem>
-      </Nav>
+      {props.isAuthorized &&
+        <Nav pullRight>
+          <LinkContainer to="/dashboard">
+            <NavItem className="btn btn-primary">Log In</NavItem>
+          </LinkContainer>
+        </Nav>
+      }
+      {!props.isAuthorized &&
+        <Nav pullRight>
+          <NavItem className="btn btn-primary" onClick={props.toggleLogin}>Log In</NavItem>
+          <NavItem className="btn btn-success" onClick={props.toggleSignup}>Sign Up</NavItem>
+        </Nav>
+      }
     </Navbar.Collapse>
   </Navbar>
 );

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Jumbotron, Grid, Row, Col, Button } from 'react-bootstrap';
 import './LandingPage.styles.css';
 
@@ -40,6 +41,7 @@ class LandingPage extends Component {
         <LandingPageHeader
           toggleLogin={this.toggleLogin}
           toggleSignup={this.toggleSignup}
+          isAuthorized={this.props.isAuthorized}
         />
         <Jumbotron>
           <Grid fluid>
@@ -79,4 +81,10 @@ class LandingPage extends Component {
   }
 }
 
-export default LandingPage;
+function mapStateToProps(state) {
+  return {
+    isAuthorized: state.isAuthorized,
+  }
+}
+
+export default connect(mapStateToProps, null)(LandingPage);
