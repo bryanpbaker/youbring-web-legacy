@@ -14,7 +14,7 @@ const Events = (props) => {
   if (props.events) {
     return (
       <div className="events">
-        <Button bsStyle="primary" bsSize="large">Create a New Event</Button>
+        <Button bsStyle="primary" bsSize="large" onClick={props.toggleCreateEventModal}>Create a New Event</Button>
         <ul className="event-list">
           {renderEvents()}
         </ul>

@@ -5,6 +5,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
 import Events from '../../components/Events/Events';
+import CreateEvent from '../../components/CreateEvent/CreateEvent';
 
 import { fetchUser, authorizeUser, logout } from '../../actions/auth.actions';
 
@@ -12,7 +13,12 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      createEventModalOpen: false,
+    }
+
     this.logout = this.logout.bind(this);
+    this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
   }
 
   componentWillMount() {
@@ -24,6 +30,12 @@ class Dashboard extends Component {
 
   logout() {
     this.props.logout();
+  }
+
+  toggleCreateEventModal() {
+    this.setState({
+      createEventModalOpen: !this.state.createEventModalOpen,
+    });
   }
 
   render() {
@@ -42,10 +54,15 @@ class Dashboard extends Component {
               <Col xs={12}>
                 <Events
                   events={this.props.user.profile.events}
+                  toggleCreateEventModal={this.toggleCreateEventModal}
                 />
               </Col>
             </Row>
           </Grid>
+          <CreateEvent
+            modalIsOpen={this.state.createEventModalOpen}
+            toggleModal={this.toggleCreateEventModal}
+          />
         </div>
       );
     }
