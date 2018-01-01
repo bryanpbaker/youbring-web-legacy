@@ -1,18 +1,18 @@
 // action types
 export const FETCH_EVENT = 'FETCH_EVENT';
+export const CLEAR_EVENT = 'CLEAR_EVENT';
 
 // TODO, use env variable for api url
 const BASE_URL = process.env.REACT_APP_API_URL;
 
 /**
- * check local storage to see if a user is currently logged in
- * if there is a user, dispatch it to state
+ * make a GET request to the API for an event with the given id
  */
 export function fetchEvent(user, eventId) {
   const { token, profile } = user;
 
   return (dispatch) => {
-    fetch(`${BASE_URL}user/${profile.userId}/events`, {
+    fetch(`${BASE_URL}user/${profile.userId}/events/${eventId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -20,12 +20,22 @@ export function fetchEvent(user, eventId) {
       },
     })
       .then(res => res.json())
-      .then((response) => console.log(response));
+      .then((response) => {
+        if (response.success) {
+          dispatch({
+            type: FETCH_EVENT,
+            payload: response.details,
+          });
+        }
+      });
+  };
+}
 
-    // dispatch user from localStorage
-    dispatch({
-      type: FETCH_EVENT,
-      payload: JSON.parse(localStorage.getItem('user')),
-    });
+/**
+ * clears the active event
+ */
+export function clearActiveEvent() {
+  return {
+    type: CLEAR_EVENT,
   };
 }
