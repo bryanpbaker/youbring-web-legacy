@@ -8,7 +8,7 @@ const DashboardHeader = (props) => {
       <Navbar fluid inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={'/'}>React-Bootstrap</Link>
+            <Link to="/">YouBring</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

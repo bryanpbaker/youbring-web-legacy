@@ -1,0 +1,19 @@
+.event-card {
+  background: var(--light-gray);
+  color: var(--white);
+  flex-basis: 100%;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+.event-card:hover {
+  color: var(--secondary);
+}
+
+@media(min-width: 768px) {
+  .event-card {
+    flex-basis: 22%;
+    margin-bottom: 60px;
+    margin-right: 25px;
+  }
+}

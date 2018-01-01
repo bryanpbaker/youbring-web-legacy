@@ -7,6 +7,7 @@ import { authorizeUser } from './actions/auth.actions';
 
 import LandingPage from './containers/LandingPage/LandingPage';
 import Dashboard from './containers/Dashboard/Dashboard';
+import EventDetail from './containers/EventDetail/EventDetail';
 
 class App extends Component {
   componentWillMount() {
@@ -23,6 +24,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/events/:id" component={EventDetail} />
         </Switch>
       </BrowserRouter>
     );

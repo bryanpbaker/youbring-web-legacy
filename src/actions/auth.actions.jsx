@@ -6,7 +6,7 @@ export const CREATE_USER_ERROR = 'CREATE_USER_ERROR';
 export const USER_AUTH = 'USER_AUTH';
 
 // TODO, use env variable for api url
-const BASE_URL = 'http://localhost:5000/';
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 /**
  * check local storage to see if a user is currently logged in
