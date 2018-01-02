@@ -11,7 +11,7 @@ const Events = (props) => {
     });
   };
 
-  if (props.events) {
+  if (props.events.length) {
     return (
       <div className="events">
         <Button bsStyle="primary" bsSize="large" onClick={props.toggleCreateEventModal}>Create a New Event</Button>
@@ -24,7 +24,7 @@ const Events = (props) => {
 
   return (
     <div className="events">
-      No Events! Click here to create one.
+      No Events! <a onClick={props.toggleCreateEventModal}>Click here</a> to create one.
     </div>
   );
 };

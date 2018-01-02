@@ -1,6 +1,7 @@
 // action types
 export const FETCH_EVENT = 'FETCH_EVENT';
 export const CLEAR_EVENT = 'CLEAR_EVENT';
+export const UPDATE_EVENTS = 'UPDATE_EVENTS';
 
 // TODO, use env variable for api url
 const BASE_URL = process.env.REACT_APP_API_URL;
@@ -60,7 +61,14 @@ export function createEvent(user, values) {
     })
       .then(res => res.json())
       .then((response) => {
-        console.log('from action response', response);
+        let user = JSON.parse(localStorage.getItem('user'));
+        user.profile.events = response.profile.events;
+        localStorage.setItem('user', JSON.stringify(user));
+
+        dispatch({
+          type: UPDATE_EVENTS,
+          payload: localStorage.getItem('user'),
+        });
       })
       .catch((err) => {
         console.error('There was a problem...', err);
