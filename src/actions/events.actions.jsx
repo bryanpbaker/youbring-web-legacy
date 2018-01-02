@@ -48,8 +48,6 @@ export function clearActiveEvent() {
  */
 export function createEvent(user, values) {
   const { token, profile } = user;
-
-  console.log(values);
   
   return (dispatch) => {
     fetch(`${BASE_URL}user/${profile.userId}/events/create`, {
@@ -58,7 +56,7 @@ export function createEvent(user, values) {
         'Content-Type': 'application/json',
         'Authorization': token,
       },
-      body: JSON.stringify({ newUser: values }),
+      body: JSON.stringify({ newEvent: values }),
     })
       .then(res => res.json())
       .then((response) => {
