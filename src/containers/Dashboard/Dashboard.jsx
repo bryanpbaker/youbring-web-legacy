@@ -5,7 +5,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
 import Events from '../../components/Events/Events';
-import CreateEvent from '../../components/CreateEvent/CreateEvent';
+import CreateEvent from '../CreateEvent/CreateEvent';
 
 import { fetchUser, authorizeUser, logout } from '../../actions/auth.actions';
 
@@ -15,7 +15,7 @@ class Dashboard extends Component {
 
     this.state = {
       createEventModalOpen: false,
-    }
+    };
 
     this.logout = this.logout.bind(this);
     this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
@@ -86,4 +86,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchUser, authorizeUser, logout })(Dashboard);
+export default connect(mapStateToProps, {
+  fetchUser, authorizeUser, logout,
+})(Dashboard);

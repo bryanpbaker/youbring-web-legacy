@@ -9,11 +9,11 @@ const validate = (values) => {
   // empty object for errors to go
   const errors = {};
 
-  if (!values.eventName) {
+  if (!values.name) {
     errors.eventName = 'Please enter a name for your event';
   }
 
-  if (!values.eventDate) {
+  if (!values.date) {
     errors.eventDate = 'Select a date for your event';
   }
 
@@ -42,22 +42,13 @@ const renderField = ({
 );
 
 const CreateEventForm = (props) => {
-  /**
-   * take user credentials and call createUser action creator
-   * @param {Object} user credentials
-   */
-  const createNewUser = (values) => {
-    props.createUser(values);
-  };
-
   return (
     <div className="email-login">
       <h3>Sign Up!</h3>
-      <form onSubmit={props.handleSubmit(createNewUser)}>
-        <Field name="firstName" component={renderField} className="form-control" type="text" label="First Name" />
-        <Field name="lastName" component={renderField} className="form-control" type="text" label="Last Name" />
-        <Field name="email" component={renderField} className="form-control" type="email" label="Email" />
-        <Field name="password" component={renderField} className="form-control" type="password" label="Password" />
+      <form onSubmit={props.handleSubmit(props.passEventValues)}>
+        <Field name="name" component={renderField} className="form-control" type="text" label="Event Name" />
+        <Field name="date" component={renderField} className="form-control" type="date" label="Event Date" />
+        <Field name="description" component={renderField} className="form-control" type="text" label="Description" />
         <button type="submit" className="btn btn-primary">Submit</button>
         {props.createUserError &&
           <div className="text-danger">
