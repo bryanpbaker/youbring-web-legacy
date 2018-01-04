@@ -13,18 +13,19 @@ class CreateEvent extends Component {
       createEventFormValues: {},
     };
 
-    this.saveValuesToState = this.saveValuesToState.bind(this);
+    this.createEvent = this.createEvent.bind(this);
   }
 
   componentWillMount() {
     Modal.setAppElement('body');
   }
 
-  saveValuesToState(values) {
+  createEvent(values) {
     this.setState({
       createEventFormValues: values,
     }, () => {
       this.props.createEvent(this.props.user, this.state.createEventFormValues);
+      this.props.toggleModal();
     });
   }
 
@@ -38,7 +39,7 @@ class CreateEvent extends Component {
           <button onClick={() => this.props.toggleModal()}>close</button>
           <h1>Create an Event</h1>
           <CreateEventForm
-            passEventValues={this.saveValuesToState}
+            passEventValues={this.createEvent}
           />
         </Modal>
       </div>

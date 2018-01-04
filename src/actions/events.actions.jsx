@@ -42,10 +42,11 @@ export function clearActiveEvent() {
 }
 
 /**
- * post a new event to our API
+ * @name createEvent
+ * @description post a new event to our API
  * if successful, get back a
  * JWT and event object
- * @param {Object} event details from form
+ * @param {Object} event :: details from form
  */
 export function createEvent(user, values) {
   const { token, profile } = user;
@@ -67,7 +68,7 @@ export function createEvent(user, values) {
 
         dispatch({
           type: UPDATE_EVENTS,
-          payload: localStorage.getItem('user'),
+          payload: JSON.parse(localStorage.getItem('user')),
         });
       })
       .catch((err) => {

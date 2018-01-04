@@ -22,10 +22,12 @@ class Dashboard extends Component {
   }
 
   componentWillMount() {
-    setTimeout(() => {
-      this.props.authorizeUser();
-      this.props.fetchUser();
-    }, 1500);
+    this.props.authorizeUser();
+    this.props.fetchUser();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('next props', nextProps.user);
   }
 
   logout() {
