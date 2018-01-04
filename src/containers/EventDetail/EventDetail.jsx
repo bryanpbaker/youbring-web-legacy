@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
+import DashboardHeader from './../../components/DashboardHeader/DashboardHeader';
 
-import { authorizeUser } from '../../actions/auth.actions';
+import { authorizeUser, logout } from '../../actions/auth.actions';
 import { fetchEvent, clearActiveEvent } from '../../actions/events.actions';
 
 class EventDetail extends Component {
@@ -33,11 +35,18 @@ class EventDetail extends Component {
   }
 
   render() {
+    if (!this.props.isAuthenticated) {
+      return <Redirect to="/" />;
+    }
+
     if (this.props.activeEvent) {
       const { name, date, description } = this.props.activeEvent;
 
       return (
         <div className="event-detail">
+          <DashboardHeader
+            logout={this.props.logout}
+          />
           <Grid fluid>
             <Row>
               <Col xs={12}>
@@ -51,15 +60,23 @@ class EventDetail extends Component {
       );
     }
 
-    return <div className="event-detail-loading">loading...</div>;
+    return (
+      <div className="event-detail-loading">
+        <DashboardHeader
+          logout={this.props.logout}
+        />
+        loading...
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
     user: state.user,
+    isAuthenticated: state.isAuthenticated,
     activeEvent: state.activeEvent,
   };
 }
 
-export default connect(mapStateToProps, { authorizeUser, fetchEvent, clearActiveEvent })(EventDetail);
+export default connect(mapStateToProps, { authorizeUser, fetchEvent, clearActiveEvent, logout })(EventDetail);

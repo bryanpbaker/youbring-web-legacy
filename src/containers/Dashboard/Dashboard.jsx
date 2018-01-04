@@ -26,10 +26,6 @@ class Dashboard extends Component {
     // this.props.fetchUser();
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('next props', nextProps.user);
-  }
-
   logout() {
     this.props.logout();
   }
