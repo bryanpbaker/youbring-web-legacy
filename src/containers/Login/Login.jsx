@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Button, Glyphicon } from 'react-bootstrap';
 import Loader from '../../components/Loader/Loader';
 // import action creators
-import { fetchUser, facebookAuth, emailAuth } from '../../actions/auth.actions';
+import { facebookAuth, emailAuth } from '../../actions/auth.actions';
 // import components
 import EmailLogin from './EmailLogin/EmailLogin';
 
@@ -94,4 +94,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { facebookAuth, fetchUser, emailAuth })(Login);
+export default connect(mapStateToProps, { facebookAuth, emailAuth })(Login);

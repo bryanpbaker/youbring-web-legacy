@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
 
-import { authorizeUser, fetchUser } from '../../actions/auth.actions';
+import { authorizeUser } from '../../actions/auth.actions';
 import { fetchEvent, clearActiveEvent } from '../../actions/events.actions';
 
 class EventDetail extends Component {
@@ -14,7 +14,6 @@ class EventDetail extends Component {
 
   componentWillMount() {
     if (!this.props.user) {
-      this.props.fetchUser();
       this.props.authorizeUser();
     }
 
@@ -63,4 +62,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { authorizeUser, fetchUser, fetchEvent, clearActiveEvent })(EventDetail);
+export default connect(mapStateToProps, { authorizeUser, fetchEvent, clearActiveEvent })(EventDetail);

@@ -7,7 +7,7 @@ import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
 import Events from '../../components/Events/Events';
 import CreateEvent from '../CreateEvent/CreateEvent';
 
-import { fetchUser, authorizeUser, logout } from '../../actions/auth.actions';
+import { authorizeUser, logout } from '../../actions/auth.actions';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class Dashboard extends Component {
 
   componentWillMount() {
     this.props.authorizeUser();
-    this.props.fetchUser();
+    // this.props.fetchUser();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -89,5 +89,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  fetchUser, authorizeUser, logout,
+  authorizeUser, logout,
 })(Dashboard);

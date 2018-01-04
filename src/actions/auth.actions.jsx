@@ -10,20 +10,6 @@ export const LOGOUT = 'LOGOUT';
 const BASE_URL = process.env.REACT_APP_API_URL;
 
 /**
- * check local storage to see if a user is currently logged in
- * if there is a user, dispatch it to state
- */
-export function fetchUser() {
-  return (dispatch) => {
-    // dispatch user from localStorage
-    dispatch({
-      type: FETCH_USER,
-      payload: JSON.parse(localStorage.getItem('user')),
-    });
-  };
-}
-
-/**
  * check local storage for a user
  * if there is a user, authenticate with the token
  * if not, redirect to the login page
@@ -49,6 +35,11 @@ export function authorizeUser() {
               type: USER_AUTH,
               payload: true,
             });
+
+            dispatch({
+              type: FETCH_USER,
+              payload: user,
+            })
           }
         });
     } else {
