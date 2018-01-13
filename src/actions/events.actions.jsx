@@ -63,7 +63,7 @@ export function createEvent(user, values) {
       .then(res => res.json())
       .then((response) => {
         let user = JSON.parse(localStorage.getItem('user'));
-        user.profile.events = response.profile.events;
+        user.profile.events = response.events;
         localStorage.setItem('user', JSON.stringify(user));
 
         dispatch({
