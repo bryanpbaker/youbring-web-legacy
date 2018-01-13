@@ -13,7 +13,7 @@ export function fetchEvent(user, eventId) {
   const { token, profile } = user;
 
   return (dispatch) => {
-    fetch(`${BASE_URL}user/${profile.userId}/events/${eventId}`, {
+    fetch(`${BASE_URL}events/${eventId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export function createEvent(user, values) {
   const { token, profile } = user;
   
   return (dispatch) => {
-    fetch(`${BASE_URL}user/${profile.userId}/events/create`, {
+    fetch(`${BASE_URL}events/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

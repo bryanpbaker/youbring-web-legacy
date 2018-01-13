@@ -21,7 +21,7 @@ export function authorizeUser() {
     if (user) {
       const { profile, token } = user;
     
-      fetch(`${BASE_URL}user/${profile.userId}`, {
+      fetch(`${BASE_URL}user`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
