@@ -6,7 +6,6 @@ export const CREATE_USER_ERROR = 'CREATE_USER_ERROR';
 export const USER_AUTH = 'USER_AUTH';
 export const LOGOUT = 'LOGOUT';
 
-// TODO, use env variable for api url
 const BASE_URL = process.env.REACT_APP_API_URL;
 
 /**
@@ -30,7 +29,6 @@ export function authorizeUser() {
       })
         .then(res => res.json())
         .then((response) => {
-          console.log(profile);
           if (response.success) {
             dispatch({
               type: USER_AUTH,
@@ -40,7 +38,7 @@ export function authorizeUser() {
             dispatch({
               type: FETCH_USER,
               payload: user,
-            })
+            });
           }
         });
     } else {
