@@ -46,7 +46,7 @@ class Dashboard extends Component {
           <Grid fluid>
             <Row>
               <Col xs={12}>
-                <h1>Hello { this.props.user.profile.first_name}!</h1>
+                <h1>Hello { this.props.user.profile.firstName}!</h1>
                 <p>Welcome to YouBring</p>
               </Col>
               <Col xs={12}>

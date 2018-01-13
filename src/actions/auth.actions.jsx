@@ -30,6 +30,7 @@ export function authorizeUser() {
       })
         .then(res => res.json())
         .then((response) => {
+          console.log(profile);
           if (response.success) {
             dispatch({
               type: USER_AUTH,
