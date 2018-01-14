@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Button, Glyphicon } from 'react-bootstrap';
-import CreateUser from '../../containers/CreateUser/CreateUser';
+import CreateUserForm from '../../containers/CreateUserForm/CreateUserForm';
 import './Signup.styles.css';
 
 const Signup = (props) => {
@@ -14,7 +14,7 @@ const Signup = (props) => {
       <Button className="close-button" onClick={props.toggle}>
         <Glyphicon glyph="remove" />
       </Button>
-      <CreateUser />
+      <CreateUserForm />
     </div>
   );
 };

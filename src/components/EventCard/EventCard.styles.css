@@ -1,9 +1,11 @@
 .event-card {
   background: var(--light-gray);
   color: var(--white);
-  flex-basis: 100%;
+  display: block;
   margin-bottom: 30px;
   padding: 20px;
+  position: relative;
+  width: 100%;
 }
 
 .event-card:hover {
@@ -12,8 +14,8 @@
 
 @media(min-width: 768px) {
   .event-card {
-    flex-basis: 22%;
     margin-bottom: 60px;
     margin-right: 25px;
+    width: calc(25% - 25px);
   }
 }
