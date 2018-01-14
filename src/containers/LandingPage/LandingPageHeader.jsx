@@ -15,7 +15,7 @@ const LandingPageHeader = props => (
     <Navbar.Collapse>
       {props.isAuthenticated &&
         <Nav pullRight>
-          <LinkContainer to="/dashboard">
+          <LinkContainer to="/events">
             <NavItem className="btn btn-primary">Log In</NavItem>
           </LinkContainer>
         </Nav>

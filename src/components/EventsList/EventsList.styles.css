@@ -1,8 +1,8 @@
-.events button {
+.events-list button {
   margin-bottom: 40px;
 }
 
-.event-list {
+.events-list .list {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;

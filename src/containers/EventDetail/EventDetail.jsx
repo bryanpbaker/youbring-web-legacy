@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
-import DashboardHeader from './../../components/DashboardHeader/DashboardHeader';
+import AppNavbar from '../AppNavbar/AppNavbar';
 
 import { authorizeUser, logout } from '../../actions/auth.actions';
 import { fetchEvent, clearActiveEvent } from '../../actions/events.actions';
@@ -15,6 +15,8 @@ class EventDetail extends Component {
   }
 
   componentWillMount() {
+    console.log(this.props.user);
+
     if (!this.props.user) {
       this.props.authorizeUser();
     }
@@ -35,18 +37,12 @@ class EventDetail extends Component {
   }
 
   render() {
-    if (!this.props.isAuthenticated) {
-      return <Redirect to="/" />;
-    }
-
     if (this.props.activeEvent) {
       const { name, date, description } = this.props.activeEvent;
 
       return (
         <div className="event-detail">
-          <DashboardHeader
-            logout={this.props.logout}
-          />
+          <AppNavbar />
           <Grid fluid>
             <Row>
               <Col xs={12}>
@@ -60,11 +56,13 @@ class EventDetail extends Component {
       );
     }
 
+    if (this.props.isAuthenticated === false) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className="event-detail-loading">
-        <DashboardHeader
-          logout={this.props.logout}
-        />
+        <AppNavbar />
         loading...
       </div>
     );

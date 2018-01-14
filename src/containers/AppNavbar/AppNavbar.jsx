@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, MenuItem, NavDropdown, NavItem, Nav } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { logout } from '../../actions/auth.actions';
 
-const Navbar = (props) => {
+const AppNavbar = (props) => {
   return (
     <header className="dashboard-header">
       <Navbar fluid inverse collapseOnSelect>
@@ -34,4 +36,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+export default connect(null, { logout })(AppNavbar);

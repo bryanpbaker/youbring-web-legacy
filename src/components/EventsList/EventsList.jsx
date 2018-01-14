@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import EventCard from '../EventCard/EventCard';
 
-import './Events.styles.css';
+import './EventsList.styles.css';
 
 const Events = (props) => {
   const renderEvents = () => {
@@ -13,9 +13,9 @@ const Events = (props) => {
 
   if (props.events.length) {
     return (
-      <div className="events">
+      <div className="events-list">
         <Button bsStyle="primary" bsSize="large" onClick={props.toggleCreateEventModal}>Create a New Event</Button>
-        <ul className="event-list">
+        <ul className="list">
           {renderEvents()}
         </ul>
       </div>

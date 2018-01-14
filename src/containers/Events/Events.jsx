@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
-
-import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
-import Events from '../../components/Events/Events';
-import CreateEvent from '../CreateEvent/CreateEvent';
+import AppNavbar from '../AppNavbar/AppNavbar';
+import EventsList from '../../components/EventsList/EventsList';
+import CreateEvent from '../../components/CreateEvent/CreateEvent';
 
 import { authorizeUser, logout } from '../../actions/auth.actions';
+import { createEvent } from '../../actions/events.actions';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -39,10 +39,8 @@ class Dashboard extends Component {
   render() {
     if (this.props.isAuthenticated && this.props.user) {
       return (
-        <div className="dashboard">
-          <DashboardHeader
-            logout={this.logout}
-          />
+        <div className="events">
+          <AppNavbar />
           <Grid fluid>
             <Row>
               <Col xs={12}>
@@ -50,7 +48,7 @@ class Dashboard extends Component {
                 <p>Welcome to YouBring</p>
               </Col>
               <Col xs={12}>
-                <Events
+                <EventsList
                   events={this.props.user.profile.events}
                   toggleCreateEventModal={this.toggleCreateEventModal}
                 />
@@ -60,6 +58,8 @@ class Dashboard extends Component {
           <CreateEvent
             modalIsOpen={this.state.createEventModalOpen}
             toggleModal={this.toggleCreateEventModal}
+            user={this.props.user}
+            createEvent={this.props.createEvent}
           />
         </div>
       );
@@ -85,5 +85,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  authorizeUser, logout,
+  authorizeUser, logout, createEvent
 })(Dashboard);

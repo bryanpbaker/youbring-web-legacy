@@ -6,7 +6,7 @@ import './App.css';
 import { authorizeUser } from './actions/auth.actions';
 
 import LandingPage from './containers/LandingPage/LandingPage';
-import Dashboard from './containers/Dashboard/Dashboard';
+import Events from './containers/Events/Events';
 import EventDetail from './containers/EventDetail/EventDetail';
 
 class App extends Component {
@@ -23,7 +23,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/events" component={Events} />
           <Route exact path="/events/:id" component={EventDetail} />
         </Switch>
       </BrowserRouter>

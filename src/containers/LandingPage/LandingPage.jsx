@@ -75,6 +75,7 @@ class LandingPage extends Component {
         <Signup
           show={this.state.signupIsShowing}
           toggle={this.toggleSignup}
+          isAuthenticated={this.props.isAuthenticated}
         />
       </div>
     );

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import CreateEventForm from '../../containers/CreateEventForm/CreateEventForm';
-
-import { createEvent } from '../../actions/events.actions';
 
 class CreateEvent extends Component {
   constructor(props) {
@@ -47,10 +44,4 @@ class CreateEvent extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-  };
-}
-
-export default connect(mapStateToProps, { createEvent })(CreateEvent)
+export default CreateEvent;
