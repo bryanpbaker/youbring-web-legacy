@@ -8,6 +8,7 @@ import { authorizeUser } from './actions/auth.actions';
 import LandingPage from './containers/LandingPage/LandingPage';
 import Events from './containers/Events/Events';
 import EventDetail from './containers/EventDetail/EventDetail';
+import Contacts from './containers/Contacts/Contacts';
 
 class App extends Component {
   componentWillMount() {
@@ -25,6 +26,7 @@ class App extends Component {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/events" component={Events} />
           <Route exact path="/events/:id" component={EventDetail} />
+          <Route exact path="/contacts" component={Contacts} />
         </Switch>
       </BrowserRouter>
     );

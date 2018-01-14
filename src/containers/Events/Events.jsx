@@ -23,7 +23,6 @@ class Dashboard extends Component {
 
   componentWillMount() {
     this.props.authorizeUser();
-    // this.props.fetchUser();
   }
 
   logout() {

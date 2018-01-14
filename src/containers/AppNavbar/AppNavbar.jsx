@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, MenuItem, NavDropdown, NavItem, Nav } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth.actions';
 
@@ -16,8 +17,12 @@ const AppNavbar = (props) => {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem eventKey={1} href="#">Link</NavItem>
-            <NavItem eventKey={2} href="#">Link</NavItem>
+            <LinkContainer to="/events">
+              <NavItem eventKey={1}>Events</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/contacts">
+              <NavItem eventKey={2}>Contacts</NavItem>
+            </LinkContainer>
             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1}>Action</MenuItem>
               <MenuItem eventKey={3.2}>Another action</MenuItem>
