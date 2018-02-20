@@ -12,6 +12,8 @@ class EventDetail extends Component {
     super(props);
 
     this.eventId = this.props.match.params.id;
+
+    this.invitees = ['jim', 'fred', 'bob']
   }
 
   componentWillMount() {
@@ -36,6 +38,18 @@ class EventDetail extends Component {
     this.props.clearActiveEvent();
   }
 
+  renderItems() {
+    return this.props.activeEvent.items.map((item) => {
+      return <li key={item}>{item}</li>
+    })
+  }
+
+  renderInvitees() {
+    return this.props.activeEvent.invitees.map((invitee) => {
+      return <li key={invitee}>{invitee}</li>
+    })
+  }
+
   render() {
     if (this.props.activeEvent) {
       const { name, date, description } = this.props.activeEvent;
@@ -49,6 +63,12 @@ class EventDetail extends Component {
                 <h1>{name}</h1>
                 <h3>{date}</h3>
                 <p>{description}</p>
+                <ul>
+                  {this.renderItems()}
+                </ul>
+                <ul>
+                  {this.renderInvitees()}
+                </ul>
               </Col>
             </Row>
           </Grid>
