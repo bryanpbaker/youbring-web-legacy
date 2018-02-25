@@ -7,7 +7,7 @@ import './EventsList.styles.css';
 const Events = (props) => {
   const renderEvents = () => {
     return props.events.map((event) => {
-      return <EventCard key={event._id} id={event._id} name={event.name} description={event.description} />;
+      return <EventCard key={event._id} id={event._id} name={event.name} description={event.description} deleteEvent={() => props.deleteEvent(props.user, event._id)} />;
     });
   };
 

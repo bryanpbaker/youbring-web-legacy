@@ -3,22 +3,27 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
 import AppNavbar from '../AppNavbar/AppNavbar';
+import EditEventForm from '../EditEventForm/EditEventForm';
 
 import { authorizeUser, logout } from '../../actions/auth.actions';
-import { fetchEvent, clearActiveEvent } from '../../actions/events.actions';
+import { fetchEvent, clearActiveEvent, updateEvent, deleteEvent } from '../../actions/events.actions';
 
 class EventDetail extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      editMode: false
+    }
+
     this.eventId = this.props.match.params.id;
 
-    this.invitees = ['jim', 'fred', 'bob']
+    this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.updateEvent = this.updateEvent.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
   }
 
   componentWillMount() {
-    console.log(this.props.user);
-
     if (!this.props.user) {
       this.props.authorizeUser();
     }
@@ -50,9 +55,27 @@ class EventDetail extends Component {
     })
   }
 
+  toggleEditMode() {
+    this.setState({
+      editMode: !this.state.editMode
+    });
+  }
+
+  updateEvent(values) {
+    this.props.updateEvent(this.props.user, this.props.activeEvent._id, values);
+  }
+
+  deleteEvent() {
+    this.props.deleteEvent(this.props.user, this.props.activeEvent._id);
+
+    setTimeout(() => {
+      this.props.history.push('/events');
+    }, 500);
+  }
+
   render() {
     if (this.props.activeEvent) {
-      const { name, date, description } = this.props.activeEvent;
+      const { name, date, description, location, time, _id } = this.props.activeEvent;
 
       return (
         <div className="event-detail">
@@ -60,15 +83,31 @@ class EventDetail extends Component {
           <Grid fluid>
             <Row>
               <Col xs={12}>
-                <h1>{name}</h1>
-                <h3>{date}</h3>
-                <p>{description}</p>
-                <ul>
-                  {this.renderItems()}
-                </ul>
-                <ul>
-                  {this.renderInvitees()}
-                </ul>
+                <button onClick={this.deleteEvent} className="delete-button">Delete</button>
+                <button onClick={this.toggleEditMode} className="edit-button">Edit</button>
+                {
+                  !this.state.editMode &&
+                  <div>
+                    <h1>{name}</h1>
+                    <h3>{date}</h3>
+                    <p>{description}</p>
+                    <p>{location}</p>
+                    <p>{time}</p>
+                    <ul>
+                      {this.renderItems()}
+                    </ul>
+                    <ul>
+                      {this.renderInvitees()}
+                    </ul>
+                  </div>
+                }
+                {
+                  this.state.editMode &&
+                  <div>
+                    <h1>Edit</h1>
+                    <EditEventForm passEventValues={this.updateEvent} activeEvent={this.props.activeEvent} />
+                  </div>
+                }
               </Col>
             </Row>
           </Grid>
@@ -97,4 +136,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { authorizeUser, fetchEvent, clearActiveEvent, logout })(EventDetail);
+export default connect(mapStateToProps, { authorizeUser, fetchEvent, clearActiveEvent, logout, updateEvent, deleteEvent })(EventDetail);

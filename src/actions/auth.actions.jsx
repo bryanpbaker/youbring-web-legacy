@@ -85,7 +85,7 @@ export function facebookAuth(accessToken) {
 export function emailAuth(credentials) {
   return (dispatch) => {
     // post to API with credentials
-    fetch(`${BASE_URL}auth/login`, {
+    fetch(`${BASE_URL}auth`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -127,7 +127,7 @@ export function emailAuth(credentials) {
  */
 export function createUser(credentials) {
   return (dispatch) => {
-    fetch(`${BASE_URL}auth/new-user`, {
+    fetch(`${BASE_URL}user/new`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -7,7 +7,7 @@ import EventsList from '../../components/EventsList/EventsList';
 import CreateEvent from '../../components/CreateEvent/CreateEvent';
 
 import { authorizeUser, logout } from '../../actions/auth.actions';
-import { createEvent } from '../../actions/events.actions';
+import { createEvent, deleteEvent } from '../../actions/events.actions';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -50,6 +50,8 @@ class Dashboard extends Component {
                 <EventsList
                   events={this.props.user.profile.events}
                   toggleCreateEventModal={this.toggleCreateEventModal}
+                  user={this.props.user}
+                  deleteEvent={this.props.deleteEvent}
                 />
               </Col>
             </Row>
@@ -84,5 +86,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  authorizeUser, logout, createEvent
+  authorizeUser, logout, createEvent, deleteEvent
 })(Dashboard);

@@ -41,7 +41,7 @@ const renderField = ({
   </div>
 );
 
-const CreateEventForm = (props) => {
+const EditEventForm = (props) => {
   return (
     <div className="email-login">
       <h3>Sign Up!</h3>
@@ -71,4 +71,4 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, { createUser })(reduxForm({
   form: 'CreateEvent',
   validate,
-})(CreateEventForm));
+})(EditEventForm));
