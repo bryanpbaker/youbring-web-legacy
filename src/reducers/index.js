@@ -3,7 +3,7 @@ import { reducer as form } from 'redux-form';
 import user from './user.reducer';
 import events from './events.reducer';
 import errors from './errors.reducer';
-import isAuthenticated from './authorization.reducer';
+import isAuthorized from './authorization.reducer';
 import activeEvent from './activeEvent.reducer';
 
 const rootReducer = combineReducers({
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   events,
   form,
   errors,
-  isAuthenticated,
+  isAuthorized,
   activeEvent,
 });
 
