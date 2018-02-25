@@ -27,6 +27,9 @@ class LandingPage extends Component {
           <div>
             <Link to="/events">Dashboard</Link>
           </div>
+          <div>
+            <Link to ="/login">Login</Link>
+          </div>
         </div>
       )
     }
