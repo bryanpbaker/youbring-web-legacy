@@ -28,7 +28,7 @@ class PrivateRoute extends Component {
         exact={this.props.exact}
         path={this.props.path}
         render={props => (
-          false === true ? <this.Component {...this.props} /> : <Redirect to="/login" />
+          this.props.isAuthorized ? <this.Component {...this.props} /> : <Redirect to="/login" />
         )}
       />
     );
