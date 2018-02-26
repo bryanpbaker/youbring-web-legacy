@@ -7,6 +7,7 @@ import { logout, authorizeUser } from '../../actions/auth.actions';
 
 class AppNavbar extends Component {
   componentWillMount() {
+    console.log('app header request');
     this.props.authorizeUser();
   }
 

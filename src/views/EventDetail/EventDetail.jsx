@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
+import _ from 'lodash';
 import AppNavbar from '../../containers/AppNavbar/AppNavbar';
 import EditEventForm from '../../containers/EditEventForm/EditEventForm';
 
@@ -23,23 +24,9 @@ class EventDetail extends Component {
     this.deleteEvent = this.deleteEvent.bind(this);
   }
 
-  componentWillMount() {
-    if (!this.props.user) {
-      this.props.authorizeUser();
-    }
-
-    if (this.props.user) {
-      console.log('request');
-      this.props.fetchEvent(this.props.user, this.eventId);
-    }
-  }
-
   componentWillReceiveProps(nextProps) {
-    if (nextProps !== this.props && this.props.user && !this.props.activeEvent && !nextProps.activeEvent) {
-      console.log('request');
-      console.log('this', this.props);
-      console.log('next', nextProps);
-      this.props.fetchEvent(nextProps.user, this.eventId);
+    if (this.props.user && !this.props.activeEvent && !nextProps.activeEvent) {
+      this.props.fetchEvent(this.eventId);
     }
   }
 

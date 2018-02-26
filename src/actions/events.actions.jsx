@@ -38,10 +38,10 @@ export function fetchAllEvents() {
 /**
  * make a GET request to the API for an event with the given id
  */
-export function fetchEvent(user, eventId) {
-  const { token, profile } = user;
+export function fetchEvent(eventId) {
+  return (dispatch, getState) => {
+    const { token, profile } = getState().user;
 
-  return (dispatch) => {
     fetch(`${BASE_URL}events/${eventId}`, {
       method: 'GET',
       headers: {
