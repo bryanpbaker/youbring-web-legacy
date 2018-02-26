@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
-import AppNavbar from '../AppNavbar/AppNavbar';
-import EditEventForm from '../EditEventForm/EditEventForm';
+import AppNavbar from '../../containers/AppNavbar/AppNavbar';
+import EditEventForm from '../../containers/EditEventForm/EditEventForm';
 
 import { authorizeUser, logout } from '../../actions/auth.actions';
 import { fetchEvent, clearActiveEvent, updateEvent, deleteEvent } from '../../actions/events.actions';
@@ -17,23 +17,15 @@ class EventDetail extends Component {
     }
 
     this.eventId = this.props.match.params.id;
+    console.log(this.eventId);
 
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.updateEvent = this.updateEvent.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
   }
 
-  componentWillMount() {
-    if (!this.props.user) {
-      this.props.authorizeUser();
-    }
-
-    if (this.props.user) {
-      this.props.fetchEvent(this.props.user, this.eventId);
-    }
-  }
-
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     if (nextProps.user && !nextProps.activeEvent) {
       this.props.fetchEvent(nextProps.user, this.eventId);
     }

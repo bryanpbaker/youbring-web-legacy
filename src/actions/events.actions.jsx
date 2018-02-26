@@ -15,7 +15,7 @@ export function fetchAllEvents() {
 
   return (dispatch, getState) => {
     const { token } = getState().user;
-    
+
     fetch(`${BASE_URL}events`, {
       method: 'GET',
       headers: {
@@ -39,9 +39,9 @@ export function fetchAllEvents() {
  * make a GET request to the API for an event with the given id
  */
 export function fetchEvent(user, eventId) {
-  const { token, profile } = user;
+  return (dispatch, getState) => {
+    const { token } = getState().user;
 
-  return (dispatch) => {
     fetch(`${BASE_URL}events/${eventId}`, {
       method: 'GET',
       headers: {
