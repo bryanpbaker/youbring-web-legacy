@@ -2,6 +2,7 @@
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS';
 export const FETCH_EVENT = 'FETCH_EVENT';
 export const CLEAR_EVENT = 'CLEAR_EVENT';
+export const CLEAR_ALL_EVENTS = 'CLEAR_ALL_EVENTS';
 export const UPDATE_EVENTS = 'UPDATE_EVENTS';
 
 // TODO, use env variable for api url
@@ -135,6 +136,15 @@ export function updateEvent(user, eventId, values) {
 export function clearActiveEvent() {
   return {
     type: CLEAR_EVENT,
+  };
+}
+
+/**
+ * clears the active event
+ */
+export function clearAllEvents() {
+  return {
+    type: CLEAR_ALL_EVENTS,
   };
 }
 

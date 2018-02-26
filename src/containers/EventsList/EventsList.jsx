@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { fetchAllEvents } from '../../actions/events.actions';
+import { fetchAllEvents, clearAllEvents } from '../../actions/events.actions';
 
 class EventsList extends Component {
   componentWillReceiveProps(nextProps) {
@@ -22,7 +22,7 @@ class EventsList extends Component {
   }
 
   componentWillUnmount() {
-    console.log('unmount!');
+    this.props.clearAllEvents();
   }
 
   render() {
@@ -50,4 +50,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchAllEvents })(EventsList);
+export default connect(mapStateToProps, { fetchAllEvents, clearAllEvents })(EventsList);
