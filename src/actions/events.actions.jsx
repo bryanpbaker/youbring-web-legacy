@@ -10,10 +10,12 @@ const BASE_URL = process.env.REACT_APP_API_URL;
 /**
  * fetch all events
  */
-export function fetchAllEvents(user) {
-  const { token, profile } = user;
+export function fetchAllEvents() {
+  // const { token, profile } = user;
 
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { token } = getState().user;
+    
     fetch(`${BASE_URL}events`, {
       method: 'GET',
       headers: {
