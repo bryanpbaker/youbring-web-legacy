@@ -6,7 +6,7 @@ import PrivateRoute from './components/PrivateRoute';
 import LandingPage from './views/LandingPage/LandingPage';
 import Login from './views/Login/Login';
 import Events from './views/Events/Events';
-import EventDetail from './containers/EventDetail/EventDetail';
+import EventDetail from './views/EventDetail/EventDetail';
 import Contacts from './containers/Contacts/Contacts';
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/events" component={Events} />
-        <Route exact path="/events/:id" component={EventDetail} />
+        <PrivateRoute exact path="/events/:id" component={EventDetail} />
         <Route exact path="/contacts" component={Contacts} />
       </Switch>
     </BrowserRouter>

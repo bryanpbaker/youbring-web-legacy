@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import { fetchAllEvents } from '../../actions/events.actions';
 
 class EventsList extends Component {
   componentWillReceiveProps(nextProps) {
-    if (nextProps.user && !this.props.events) {
+    // only fetch events if there is a user, there are no events
+    // and the incoming props don't contain events
+    // otherwise you already have, or are getting events and don't need to fetch
+    if (this.props.user && !this.props.events && !nextProps.events ) {
       this.props.fetchAllEvents();
     }
   }
 
   renderEvents() {
     return this.props.events.map((event) => {
-      return <li key={event._id}>{event.name}</li>
+      return <li key={event._id}><Link to={`/events/${event._id}`}>{event.name}</Link></li>
     })
   }
 
@@ -26,7 +30,7 @@ class EventsList extends Component {
 
     return (
       <div className="loading">
-        Loading...
+        Loading list...
       </div>
     );
   }
@@ -36,6 +40,7 @@ function mapStateToProps(state) {
   return {
     events: state.events,
     user: state.user,
+    isAuthorized: state.isAuthorized,
   };
 }
 

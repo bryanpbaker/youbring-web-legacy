@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
-import AppNavbar from '../AppNavbar/AppNavbar';
-import EditEventForm from '../EditEventForm/EditEventForm';
+import AppNavbar from '../../containers/AppNavbar/AppNavbar';
+import EditEventForm from '../../containers/EditEventForm/EditEventForm';
 
 import { authorizeUser, logout } from '../../actions/auth.actions';
 import { fetchEvent, clearActiveEvent, updateEvent, deleteEvent } from '../../actions/events.actions';
@@ -29,12 +29,16 @@ class EventDetail extends Component {
     }
 
     if (this.props.user) {
+      console.log('request');
       this.props.fetchEvent(this.props.user, this.eventId);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.user && !nextProps.activeEvent) {
+    if (nextProps !== this.props && this.props.user && !this.props.activeEvent && !nextProps.activeEvent) {
+      console.log('request');
+      console.log('this', this.props);
+      console.log('next', nextProps);
       this.props.fetchEvent(nextProps.user, this.eventId);
     }
   }
@@ -115,14 +119,14 @@ class EventDetail extends Component {
       );
     }
 
-    if (this.props.isAuthenticated === false) {
+    if (this.props.isAuthorized === false) {
       return <Redirect to="/" />;
     }
 
     return (
       <div className="event-detail-loading">
         <AppNavbar />
-        loading...
+        Loading Details...
       </div>
     );
   }
@@ -131,9 +135,11 @@ class EventDetail extends Component {
 function mapStateToProps(state) {
   return {
     user: state.user,
-    isAuthenticated: state.isAuthenticated,
+    isAuthorized: state.isAuthorized,
     activeEvent: state.activeEvent,
   };
 }
 
-export default connect(mapStateToProps, { authorizeUser, fetchEvent, clearActiveEvent, logout, updateEvent, deleteEvent })(EventDetail);
+export default connect(mapStateToProps, {
+  authorizeUser, fetchEvent, clearActiveEvent, logout, updateEvent, deleteEvent,
+})(EventDetail);

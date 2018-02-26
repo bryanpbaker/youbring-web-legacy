@@ -4,27 +4,26 @@ import { connect } from 'react-redux';
 import { authorizeUser } from '../actions/auth.actions';
 
 class PrivateRoute extends Component {
-  constructor(props) {
-    super(props);
-
-    this.Component = this.props.component;
-  }
-
   componentWillMount() {
-    this.props.authorizeUser();
+    if (!this.props.isAuthorized) {
+      this.props.authorizeUser();
+    }
   }
 
   render() {
+    const { component: ParamComponent, ...rest } = this.props;
+
     if (this.props.isAuthorized === null) {
-      return <div>Loading...</div>;
+      return <div className="loading">Authorizing...</div>
     }
 
     return (
-      <Route 
-        exact={this.props.exact}
-        path={this.props.path}
+      <Route
+        {...rest}
         render={props => (
-          this.props.isAuthorized ? <this.Component {...this.props} /> : <Redirect to="/login" />
+          this.props.isAuthorized
+          ? <ParamComponent {...props} />
+          : <Redirect to="/login" />
         )}
       />
     );
