@@ -83,7 +83,6 @@ export function facebookAuth(accessToken) {
  * @param {Object} credentials - user login credentials
  */
 export function emailAuth(credentials) {
-  console.log('called!');
   return (dispatch) => {
     // post to API with credentials
     fetch(`${BASE_URL}auth`, {

@@ -14,10 +14,6 @@ class PrivateRoute extends Component {
     this.props.authorizeUser();
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('nextProps', nextProps);
-  }
-
   render() {
     if (this.props.isAuthorized === null) {
       return <div>Loading...</div>;

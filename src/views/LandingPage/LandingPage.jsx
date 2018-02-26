@@ -45,7 +45,6 @@ class LandingPage extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     isAuthorized: state.isAuthorized,
   };
