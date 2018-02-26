@@ -6,6 +6,11 @@ import { connect } from 'react-redux';
 import { logout, authorizeUser } from '../../actions/auth.actions';
 
 class AppNavbar extends Component {
+
+  /**
+   * TODO
+   * try to avoid having to call the here
+  */
   componentWillMount() {
     console.log('app header request');
     this.props.authorizeUser();
