@@ -35,7 +35,6 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps', nextProps);
     // check new props for authorization
     if (nextProps.isAuthorized) {
       // throttle for better user experience

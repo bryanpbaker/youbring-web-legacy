@@ -8,6 +8,12 @@ class PrivateRoute extends Component {
     this.props.authorizeUser();
   }
 
+  componentWillUpdate(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      this.props.authorizeUser();
+    }
+  }
+
   render() {
     const { component: ParamComponent, ...rest } = this.props;
 

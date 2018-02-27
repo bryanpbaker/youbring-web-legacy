@@ -11,8 +11,6 @@ class EventsList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('helloooo');
-    console.log(nextProps);
     // only fetch events if there is a user, there are no events
     // and the incoming props don't contain events
     // otherwise you already have, or are getting events and don't need to fetch

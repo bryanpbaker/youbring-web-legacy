@@ -31,9 +31,7 @@ class EventDetail extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('next props detail', nextProps);
     if (nextProps.user && !this.props.activeEvent) {
-      console.log('make request');
       this.props.fetchEvent(this.eventId);
     }
   }
