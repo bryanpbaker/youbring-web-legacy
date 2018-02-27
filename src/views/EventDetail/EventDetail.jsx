@@ -24,8 +24,16 @@ class EventDetail extends Component {
     this.deleteEvent = this.deleteEvent.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.user && this.eventId) {
+      this.props.fetchEvent(this.eventId);
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
-    if (this.props.user && !this.props.activeEvent && !nextProps.activeEvent) {
+    console.log('next props detail', nextProps);
+    if (nextProps.user && !this.props.activeEvent) {
+      console.log('make request');
       this.props.fetchEvent(this.eventId);
     }
   }

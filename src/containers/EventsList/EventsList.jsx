@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom'
 import { fetchAllEvents, clearAllEvents } from '../../actions/events.actions';
 
 class EventsList extends Component {
+  componentWillMount() {
+    if (this.props.user) {
+      this.props.fetchAllEvents();
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     console.log('helloooo');
     console.log(nextProps);

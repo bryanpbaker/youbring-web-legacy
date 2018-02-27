@@ -5,10 +5,7 @@ import { authorizeUser } from '../actions/auth.actions';
 
 class PrivateRoute extends Component {
   componentWillMount() {
-    if (!this.props.isAuthorized) {
-      console.log('private route requetst');
-      this.props.authorizeUser();
-    }
+    this.props.authorizeUser();
   }
 
   render() {
