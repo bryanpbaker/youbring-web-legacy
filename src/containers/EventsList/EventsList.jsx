@@ -4,29 +4,46 @@ import { Link } from 'react-router-dom'
 import { fetchAllEvents, clearAllEvents } from '../../actions/events.actions';
 
 class EventsList extends Component {
-  componentWillMount() {
-    if (this.props.user) {
-      this.props.fetchAllEvents();
-    }
+  constructor() {
+    super();
+
+    this.state = {
+      fetchActionCalled: false,
+    };
+
+    this.fetchEvents = this.fetchEvents.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     // only fetch events if there is a user, there are no events
     // and the incoming props don't contain events
     // otherwise you already have, or are getting events and don't need to fetch
-    if (nextProps.user && !this.props.events) {
-      this.props.fetchAllEvents();
+    if (!this.state.fetchActionCalled && nextProps.user && !this.props.events) {
+      console.log('fetch events');
+      this.fetchEvents();
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearAllEvents();
+
+    this.setState({
+      fetchActionCalled: false,
+    });
+  }
+
+  fetchEvents() {
+    this.props.fetchAllEvents();
+
+    this.setState({
+      fetchActionCalled: true,
+    });
   }
 
   renderEvents() {
     return this.props.events.map((event) => {
       return <li key={event._id}><Link to={`/events/${event._id}`}>{event.name}</Link></li>
     })
-  }
-
-  componentWillUnmount() {
-    this.props.clearAllEvents();
   }
 
   render() {

@@ -14,7 +14,8 @@ class EventDetail extends Component {
     super(props);
 
     this.state = {
-      editMode: false
+      editMode: false,
+      fetchActionCalled: false,
     }
 
     this.eventId = this.props.match.params.id;
@@ -22,22 +23,29 @@ class EventDetail extends Component {
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.updateEvent = this.updateEvent.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
-  }
-
-  componentDidMount() {
-    if (this.props.user && this.eventId) {
-      this.props.fetchEvent(this.eventId);
-    }
+    this.fetchEvent = this.fetchEvent.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.user && !this.props.activeEvent) {
-      this.props.fetchEvent(this.eventId);
+    if (!this.state.fetchActionCalled && nextProps.user && !this.props.activeEvent) {
+      this.fetchEvent();
     }
   }
 
   componentWillUnmount() {
     this.props.clearActiveEvent();
+
+    this.setState({
+      fetchActionCalled: true
+    });
+  }
+
+  fetchEvent() {
+    this.props.fetchEvent(this.eventId);
+
+    this.setState({
+      fetchActionCalled: true
+    });
   }
 
   renderItems() {
