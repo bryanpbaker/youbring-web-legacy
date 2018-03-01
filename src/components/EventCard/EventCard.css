@@ -1,0 +1,15 @@
+.event-card {
+  background-color: var(--light-gray);
+  padding: 25px;
+}
+
+.event-card .event-name {
+  color: var(--primary);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.event-card .view-more {
+  color: var(--accent);
+  font-size: 16px;
+}

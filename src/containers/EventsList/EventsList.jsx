@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
 import { fetchAllEvents, clearAllEvents } from '../../actions/events.actions';
+
+import EventCard from '../../components/EventCard/EventCard';
 
 class EventsList extends Component {
   constructor() {
@@ -15,9 +18,6 @@ class EventsList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // only fetch events if there is a user, there are no events
-    // and the incoming props don't contain events
-    // otherwise you already have, or are getting events and don't need to fetch
     if (!this.state.fetchActionCalled && nextProps.user && !this.props.events) {
       console.log('fetch events');
       this.fetchEvents();
@@ -42,14 +42,16 @@ class EventsList extends Component {
 
   renderEvents() {
     return this.props.events.map((event) => {
-      return <li key={event._id}><Link to={`/events/${event._id}`}>{event.name}</Link></li>
+      const date = <Moment format="MM/DD/YYYY" date={event.date} />;
+
+      return <EventCard key={event._id} name={event.name} path={`/events/${event._id}`} date={date} />;
     })
   }
 
   render() {
     if (this.props.events) {
       return (
-        <div className="events-list">
+        <div className="events-list" style={{ marginLeft: '-15px', marginRight: '-15px' }} >
           {this.renderEvents()}
         </div>
       );

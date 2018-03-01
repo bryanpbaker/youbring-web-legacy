@@ -4,11 +4,12 @@ import { Navbar, MenuItem, NavDropdown, NavItem, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { logout, authorizeUser } from '../../actions/auth.actions';
+import './AppNavbar.css';
 
 const AppNavbar = (props) => {
   return (
-    <header className="dashboard-header">
-      <Navbar fluid inverse collapseOnSelect>
+    <header className="app-navbar">
+      <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">YouBring</Link>
@@ -16,13 +17,7 @@ const AppNavbar = (props) => {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav>
-            <LinkContainer to="/events">
-              <NavItem eventKey={1}>Events</NavItem>
-            </LinkContainer>
-            <LinkContainer to="/contacts">
-              <NavItem eventKey={2}>Contacts</NavItem>
-            </LinkContainer>
+          {/* <Nav>
             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1}>Action</MenuItem>
               <MenuItem eventKey={3.2}>Another action</MenuItem>
@@ -30,9 +25,11 @@ const AppNavbar = (props) => {
               <MenuItem divider />
               <MenuItem eventKey={3.3}>Separated link</MenuItem>
             </NavDropdown>
-          </Nav>
+          </Nav> */}
           <Nav pullRight>
-            <NavItem eventKey={1} href="#">Link Right</NavItem>
+            <LinkContainer to="/events">
+              <NavItem eventKey={1}>Events</NavItem>
+            </LinkContainer>
             <NavItem eventKey={2} onClick={props.logout}>Log Out</NavItem>
           </Nav>
         </Navbar.Collapse>

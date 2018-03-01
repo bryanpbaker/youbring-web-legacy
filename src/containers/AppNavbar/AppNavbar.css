@@ -1,0 +1,20 @@
+.app-navbar .navbar {
+  background-color: var(--primary);
+  border: none;
+  border-radius: 0;
+}
+
+.app-navbar .navbar-brand {
+  color: white;
+  font-size: 24px;
+  font-weight: bolder;
+  letter-spacing: .25px;
+}
+
+.app-navbar .navbar-default .navbar-nav a {
+  color: white;
+}
+
+.app-navbar .navbar-default .navbar-nav .active a {
+  background: var(--secondary);
+}

@@ -3,16 +3,18 @@ Color Variables
 **************************************/
 :root {
   /* colors */
-  --primary: #999;
-  --secondary: #666;
-  --accent: #aaa;
-  --white: white;
-  --light-gray: #BDC3C7;
+  --primary: #22313F;
+  --secondary: #F2784B;
+  --accent: #00AEEF;
+  --white: #FFFFFF;
+  --light-gray: #E4EAEC;
+  --medium-gray: #A1A6BB;
+  --dark-gray: #76838F;
   --black: #001021;
   --red: #D91E18;
 
   /* fonts */
-  --font: 'Poppins', sans-serif;
+  --font: 'Barlow', sans-serif;
   --base-font-size: 16px;
 }
 
@@ -43,8 +45,18 @@ Helpers
   padding: 9px 12px;
 }
 
-.btn-secondary {
+.btn-primary {
   background: var(--primary);
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: white;
+}
+
+.btn-accent {
+  background: var(--accent);
   color: white;
 }
 
