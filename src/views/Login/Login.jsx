@@ -4,7 +4,7 @@ import Redirect from 'react-router-dom/Redirect';
 import FacebookLogin from 'react-facebook-login';
 import { connect } from 'react-redux';
 import { emailAuth, authorizeUser, facebookAuth } from '../../actions/auth.actions';
-import EmailLogin from '../../containers/EmailLogin/EmailLogin';
+import EmailLoginForm from '../../containers/EmailLoginForm/EmailLoginForm';
 
 class Login extends Component {
   constructor(props) {
@@ -83,7 +83,7 @@ class Login extends Component {
         <Grid fluid>
           <Row>
             <Col xs={12} md={4} mdOffset={4}>
-              <EmailLogin onSubmit={this.authorizeUserWithEmail} />
+              <EmailLoginForm onSubmit={this.authorizeUserWithEmail} />
             </Col>
             <Col xs={12} md={4} mdOffset={4}>
               <h2>or</h2>
