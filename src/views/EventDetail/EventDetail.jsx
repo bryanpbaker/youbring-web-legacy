@@ -36,7 +36,7 @@ class EventDetail extends Component {
     this.props.clearActiveEvent();
 
     this.setState({
-      fetchActionCalled: true
+      fetchActionCalled: true,
     });
   }
 
@@ -44,7 +44,7 @@ class EventDetail extends Component {
     this.props.fetchEvent(this.eventId);
 
     this.setState({
-      fetchActionCalled: true
+      fetchActionCalled: true,
     });
   }
 
