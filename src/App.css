@@ -50,14 +50,32 @@ Helpers
   color: white;
 }
 
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  text-decoration: underline;
+}
+
 .btn-secondary {
   background: var(--secondary);
   color: white;
 }
 
+.btn-secondary {
+  background: var(--secondary);
+  color: white;
+  text-decoration: underline;
+}
+
 .btn-accent {
   background: var(--accent);
   color: white;
+}
+
+.btn-accent:hover {
+  background: var(--accent);
+  color: white;
+  text-decoration: underline;
 }
 
 /**************************************

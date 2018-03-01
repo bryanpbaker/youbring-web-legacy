@@ -14,7 +14,7 @@ const Dashboard = () => {
           <Col xs={12}>    
             <h1>Dashboard</h1>
             <div className="actions pull-right">
-              <Button className="action-button" bsStyle="primary">
+              <Button className="action-button btn-accent">
                 <FontAwesome
                   name="plus-circle"
                   size="2x"
