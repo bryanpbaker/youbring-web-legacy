@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
-import _ from 'lodash';
 import AppNavbar from '../../containers/AppNavbar/AppNavbar';
-import EditEventForm from '../../containers/EditEventForm/EditEventForm';
 
 import { authorizeUser, logout } from '../../actions/auth.actions';
 import { fetchEvent, clearActiveEvent, updateEvent, deleteEvent } from '../../actions/events.actions';
@@ -14,13 +12,11 @@ class EventDetail extends Component {
     super(props);
 
     this.state = {
-      editMode: false,
       fetchActionCalled: false,
-    }
+    };
 
     this.eventId = this.props.match.params.id;
 
-    this.toggleEditMode = this.toggleEditMode.bind(this);
     this.updateEvent = this.updateEvent.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
     this.fetchEvent = this.fetchEvent.bind(this);
@@ -60,12 +56,6 @@ class EventDetail extends Component {
     })
   }
 
-  toggleEditMode() {
-    this.setState({
-      editMode: !this.state.editMode
-    });
-  }
-
   updateEvent(values) {
     this.props.updateEvent(this.props.user, this.props.activeEvent._id, values);
   }
@@ -89,30 +79,19 @@ class EventDetail extends Component {
             <Row>
               <Col xs={12}>
                 <button onClick={this.deleteEvent} className="delete-button">Delete</button>
-                <button onClick={this.toggleEditMode} className="edit-button">Edit</button>
-                {
-                  !this.state.editMode &&
-                  <div>
-                    <h1>{name}</h1>
-                    <h3>{date}</h3>
-                    <p>{description}</p>
-                    <p>{location}</p>
-                    <p>{time}</p>
-                    <ul>
-                      {this.renderItems()}
-                    </ul>
-                    <ul>
-                      {this.renderInvitees()}
-                    </ul>
-                  </div>
-                }
-                {
-                  this.state.editMode &&
-                  <div>
-                    <h1>Edit</h1>
-                    <EditEventForm passEventValues={this.updateEvent} activeEvent={this.props.activeEvent} />
-                  </div>
-                }
+                <div>
+                  <h1>{name}</h1>
+                  <h3>{date}</h3>
+                  <p>{description}</p>
+                  <p>{location}</p>
+                  <p>{time}</p>
+                  <ul>
+                    {this.renderItems()}
+                  </ul>
+                  <ul>
+                    {this.renderInvitees()}
+                  </ul>
+                </div>
               </Col>
             </Row>
           </Grid>
