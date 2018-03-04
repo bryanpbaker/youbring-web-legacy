@@ -19,7 +19,6 @@ class EventsList extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.state.fetchActionCalled && nextProps.user && !this.props.events) {
-      console.log('fetch events');
       this.fetchEvents();
     }
   }
@@ -40,12 +39,24 @@ class EventsList extends Component {
     });
   }
 
+  deleteEvent(eventId) {
+    console.log(eventId);
+  }
+
   renderEvents() {
     return this.props.events.map((event) => {
       const date = <Moment format="MM/DD/YYYY" date={event.date} />;
 
-      return <EventCard key={event._id} name={event.name} path={`/events/${event._id}`} date={date} />;
-    })
+      return (
+        <EventCard 
+          key={event._id} 
+          name={event.name} 
+          path={`/events/${event._id}`} 
+          date={date} 
+          deleteEvent={() => this.deleteEvent(event._id)}
+        />
+      );
+    });
   }
 
   render() {

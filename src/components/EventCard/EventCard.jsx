@@ -8,7 +8,7 @@ import './EventCard.css';
 const EventCard = props => (
   <Col xs={12} sm={6} md={3} className="event-card-container">
     <div className="event-card">
-      <button className="delete-button">
+      <button className="delete-button" onClick={props.deleteEvent}>
         <FontAwesome
           name="trash"
         />
