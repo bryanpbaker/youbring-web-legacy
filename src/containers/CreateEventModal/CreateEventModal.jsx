@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
+import CreateEventForm from '../../containers/CreateEventForm/CreateEventForm';
 
 Modal.setAppElement('#root');
 
@@ -12,6 +13,9 @@ const CreateEventModal = props => (
     >
       <button onClick={props.onRequestCloseModal}>Close</button>
       <h2>Create a New Event!</h2>
+      <CreateEventForm
+        closeModal={props.onRequestCloseModal}
+      />
     </Modal>
   </div>
 );

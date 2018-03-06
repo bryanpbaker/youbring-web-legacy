@@ -4,6 +4,7 @@ export const FETCH_EVENT = 'FETCH_EVENT';
 export const CLEAR_EVENT = 'CLEAR_EVENT';
 export const CLEAR_ALL_EVENTS = 'CLEAR_ALL_EVENTS';
 export const UPDATE_EVENTS = 'UPDATE_EVENTS';
+export const EVENT_CREATED = 'EVENT_CREATED';
 
 // TODO, use env variable for api url
 const BASE_URL = process.env.REACT_APP_API_URL;
@@ -21,7 +22,7 @@ export function fetchAllEvents() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token,
+        Authorization: token,
       },
     })
       .then(res => res.json())
@@ -47,7 +48,7 @@ export function fetchEvent(eventId) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token,
+        Authorization: token,
       },
     })
       .then(res => res.json())
@@ -67,29 +68,25 @@ export function fetchEvent(eventId) {
  * @description post a new event to our API
  * if successful, get back a
  * JWT and event object
- * @param {Object} event :: details from form
+ * @param {Object} values :: details from form
  */
-export function createEvent(user, values) {
-  const { token, profile } = user;
-  
-  return (dispatch) => {
+export function createEvent(values) {
+  return (dispatch, getState) => {
+    const { token } = getState().user;
+
     fetch(`${BASE_URL}events/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token,
+        Authorization: token,
       },
       body: JSON.stringify({ newEvent: values }),
     })
       .then(res => res.json())
       .then((response) => {
-        let user = JSON.parse(localStorage.getItem('user'));
-        user.profile.events = response.events;
-        localStorage.setItem('user', JSON.stringify(user));
-
         dispatch({
-          type: UPDATE_EVENTS,
-          payload: JSON.parse(localStorage.getItem('user')),
+          type: EVENT_CREATED,
+          payload: response.events,
         });
       })
       .catch((err) => {
@@ -109,7 +106,7 @@ export function updateEvent(user, eventId, values) {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token,
+        Authorization: token,
       },
       body: JSON.stringify({ updatedEvent: values }),
     })
@@ -159,7 +156,7 @@ export function deleteEvent(user, eventId) {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token,
+        Authorization: token,
       },
     })
       .then(res => res.json())

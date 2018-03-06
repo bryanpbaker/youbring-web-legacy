@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { createUser } from '../../actions/auth.actions';
-import Loader from '../../components/Loader/Loader';
+import { createEvent } from '../../actions/events.actions';
 
 // form validation
 const validate = (values) => {
@@ -42,10 +41,15 @@ const renderField = ({
 );
 
 const CreateEventForm = (props) => {
+  const createEventAction = (values) => {
+    props.createEvent(values);
+    props.closeModal();
+  }
+
   return (
     <div className="email-login">
       <h3>Sign Up!</h3>
-      <form onSubmit={props.handleSubmit(props.passEventValues)}>
+      <form onSubmit={props.handleSubmit(createEventAction)}>
         <Field name="name" component={renderField} className="form-control" type="text" label="Event Name" />
         <Field name="date" component={renderField} className="form-control" type="date" label="Event Date" />
         <Field name="description" component={renderField} className="form-control" type="text" label="Description" />
@@ -68,7 +72,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createUser })(reduxForm({
+export default connect(mapStateToProps, { createEvent })(reduxForm({
   form: 'CreateEvent',
   validate,
 })(CreateEventForm));

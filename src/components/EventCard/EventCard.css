@@ -1,3 +1,7 @@
+.event-card-container {
+  margin-bottom: 40px;
+}
+
 .event-card {
   background-color: var(--light-gray);
   padding: 25px;
