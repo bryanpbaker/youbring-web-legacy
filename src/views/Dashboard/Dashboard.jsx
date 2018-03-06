@@ -3,7 +3,7 @@ import { Grid, Row, Col, Button } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import AppNavbar from '../../containers/AppNavbar/AppNavbar';
 import EventsList from '../../containers/EventsList/EventsList';
-import CreateEventModal from '../../containers/CreateEventModal/CreateEventModal';
+import CreateEventModal from '../../components/CreateEventModal/CreateEventModal';
 import './Dashboard.styles.css';
 
 class Dashboard extends Component {
