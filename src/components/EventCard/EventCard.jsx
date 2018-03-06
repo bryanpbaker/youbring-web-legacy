@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Col } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
@@ -19,5 +20,11 @@ const EventCard = props => (
     </div>
   </Col>
 );
+
+EventCard.propTypes = {
+  deleteEvent: PropTypes.func.isRequired,
+  path: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+};
 
 export default EventCard;
