@@ -25,6 +25,7 @@ EventCard.propTypes = {
   deleteEvent: PropTypes.func.isRequired,
   path: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  date: PropTypes.object.isRequired,
 };
 
 export default EventCard;
