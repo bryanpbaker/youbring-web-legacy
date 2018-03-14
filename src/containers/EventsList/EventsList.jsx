@@ -2,16 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
-<<<<<<< Updated upstream
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { fetchAllEvents, clearAllEvents, deleteEvent } from '../../actions/events.actions';
-=======
-import { fetchAllEvents, deleteEvent, clearAllEvents } from '../../actions/events.actions';
->>>>>>> Stashed changes
 
 import EventCard from '../../components/EventCard/EventCard';
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 
 class EventsList extends Component {
   constructor() {
@@ -84,10 +79,6 @@ class EventsList extends Component {
       return (
         <div className="events-list" style={{ marginLeft: '-15px', marginRight: '-15px' }} >
           {this.renderEvents()}
-          <ConfirmModal
-            modalIsOpen={this.state.confirmModalIsOpen}
-            confirm={(event) => console.log(event)}
-          />
         </div>
       );
     } else if (this.props.events && this.props.events.length === 0) {
@@ -114,12 +105,8 @@ function mapStateToProps(state) {
   };
 }
 
-<<<<<<< Updated upstream
-export default connect(mapStateToProps, { fetchAllEvents, clearAllEvents, deleteEvent })(EventsList);
-=======
 export default connect(mapStateToProps, { 
   fetchAllEvents,
-  deleteEvent,
   clearAllEvents,
+  deleteEvent,
 })(EventsList);
->>>>>>> Stashed changes
