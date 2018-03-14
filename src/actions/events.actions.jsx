@@ -5,6 +5,7 @@ export const CLEAR_EVENT = 'CLEAR_EVENT';
 export const CLEAR_ALL_EVENTS = 'CLEAR_ALL_EVENTS';
 export const UPDATE_EVENTS = 'UPDATE_EVENTS';
 export const EVENT_CREATED = 'EVENT_CREATED';
+export const EVENT_DELETED = 'EVENT_DELETED';
 
 // TODO, use env variable for api url
 const BASE_URL = process.env.REACT_APP_API_URL;
@@ -85,7 +86,7 @@ export function createEvent(values) {
       .then(res => res.json())
       .then((response) => {
         dispatch({
-          type: EVENT_CREATED,
+          type: UPDATE_EVENTS,
           payload: response.events,
         });
       })
@@ -148,10 +149,10 @@ export function clearAllEvents() {
 /**
  * delete event by id
  */
-export function deleteEvent(user, eventId) {
-  const { token, profile } = user;
+export function deleteEvent(eventId) {
+  return (dispatch, getState) => {
+    const { token } = getState().user;
 
-  return (dispatch) => {
     fetch(`${BASE_URL}events/${eventId}`, {
       method: 'DELETE',
       headers: {
@@ -161,13 +162,9 @@ export function deleteEvent(user, eventId) {
     })
       .then(res => res.json())
       .then((response) => {
-        let user = JSON.parse(localStorage.getItem('user'));
-        user.profile.events = response.events;
-        localStorage.setItem('user', JSON.stringify(user));
-
         dispatch({
           type: UPDATE_EVENTS,
-          payload: JSON.parse(localStorage.getItem('user')),
+          payload: response.events,
         });
       })
       .catch((err) => {
