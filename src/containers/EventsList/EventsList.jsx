@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
-import { fetchAllEvents, clearAllEvents } from '../../actions/events.actions';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { fetchAllEvents, clearAllEvents, deleteEvent } from '../../actions/events.actions';
 
 import EventCard from '../../components/EventCard/EventCard';
 
@@ -40,7 +42,19 @@ class EventsList extends Component {
   }
 
   deleteEvent(eventId) {
-    console.log(eventId);
+    confirmAlert({
+      title: 'Delete Event',
+      message: 'Are you sure?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => this.props.deleteEvent(eventId)
+        },
+        {
+          label: 'No',
+        },
+      ],
+    });
   }
 
   renderEvents() {
@@ -84,4 +98,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchAllEvents, clearAllEvents })(EventsList);
+export default connect(mapStateToProps, { fetchAllEvents, clearAllEvents, deleteEvent })(EventsList);
