@@ -1,3 +1,8 @@
+#YouBring
+YouBring is an application used to manage event invitees and items which should be brought to the event. You create various types of events, assign invitees and then assign items for each invitee to bring. It simplifies event planning.
+
+## Getting Started
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
