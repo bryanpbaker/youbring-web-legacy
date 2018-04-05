@@ -1,4 +1,4 @@
-#YouBring
+# YouBring
 YouBring is an application used to manage event invitees and items which should be brought to the event. You create various types of events, assign invitees and then assign items for each invitee to bring. It simplifies event planning.
 
 ## Getting Started
